@@ -1,0 +1,40 @@
+{
+  "name": "webpack-express",
+  "engines": {
+    "node": ">=8.5.0"
+  },
+  "engineStrict": true,
+  "version": "1.0.0",
+  "description": "Webpack + Express boilerplate",
+  "main": "server/start.js",
+  "repository": "https://github.com/pstrawberrie/boilerplates",
+  "author": "pstrawberrie",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon -e js,pug ./server/start.js",
+    "build": "webpack --config ./server/_config/webpack.config.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.0.1",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "pug": "^2.0.0-rc.4",
+    "tmi.js": "^1.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "json-loader": "^0.5.7",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "webpack": "^3.6.0",
+    "webpack-dev-middleware": "^1.12.0"
+  }
+}

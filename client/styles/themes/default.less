@@ -1,0 +1,45 @@
+/* Default Theme */
+
+// Color Variables
+@white: #fff;
+@black: #000;
+@gray: #ddd;
+
+@primary: #ff00ff;
+
+@nav-bg: #262626;
+
+@rpg-health: #f45793;
+@rpg-action: #57f462;
+@rpg-mind: #57baf4;
+@rpg-attack: #f45858;
+@rpg-defense: #f4bd57;
+
+// Color Utility: Backgrounds
+.bg-white { background:@white;color:@black; }
+.bg-black { background:@black;color:@white; }
+.bg-gray { background:@gray;color:@black; }
+
+// Color Utility: Text
+.text-white { color:@white; }
+.text-black { color:@black; }
+
+// Theme Master
+body.theme-default {
+  .bg-black;
+
+  // Navigation Component
+  nav { background:@nav-bg; color: @white; }
+  nav a:hover { border-color:@white; }
+
+  // Card Component
+  .card__footer.has-border { border-color: @gray; }
+
+}
+
+// RPG Text Colors
+.rpgc.health { color:@rpg-health; }
+.rpgc.action { color:@rpg-action; }
+.rpgc.mind { color:@rpg-mind; }
+.rpgc.attack { color:@rpg-attack; }
+.rpgc.defense { color:@rpg-defense; }

@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+######################
+## pbot
+######################
+_reference
+secret.js
