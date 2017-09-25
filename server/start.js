@@ -10,6 +10,9 @@ mongoose.connection.on('error', (err) => {
 // Import Agenda Jobs
 require('./lib/jobs');
 
+// Import IRC Library
+require('./lib/irc');
+
 // Import Models
 require('./models/Character');
 

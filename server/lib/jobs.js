@@ -11,7 +11,7 @@ agenda.define('test', function(job, done) {
 //+++ Job CRONs
 agenda.on('ready', function() {
 
-  agenda.every('10 seconds', 'test');
+  agenda.every('30 seconds', 'test');
 
 });
 

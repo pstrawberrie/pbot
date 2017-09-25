@@ -8,7 +8,7 @@ const compression = require('compression');
 const promisify = require('es6-promisify');
 const flash = require('connect-flash');
 const routes = require('./routes/index');
-const helpers = require('./util/helpers');
+const helpers = require('./lib/helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 
 const app = express();

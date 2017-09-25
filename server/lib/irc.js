@@ -34,6 +34,7 @@ irc.on('connected', function() {
 });
 
 //+ IRC Disconnected Listener
+//- note: does not fire on node process exit
 irc.on('disconnected', function() {
   irc.whisper(secret.botOwner, 'pbot just disconnected!');
 });
@@ -66,7 +67,7 @@ irc.on("chat", function (channel, userstate, message, self) {
   if(passWhispers === 1) {
     irc.whisper(
       secret.botOwner,
-      user + ' just made command: ' + term
+      userstate.username + ' just made command: ' + term
     );
   }
 

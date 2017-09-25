@@ -1,6 +1,6 @@
 const game = require('./game');
 const chat = require('./irc');
-const h = require('../helpers');
+const h = require('./helpers');
 
 // Define All Commands
 // - Commands should return promises!
