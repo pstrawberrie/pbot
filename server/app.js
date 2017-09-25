@@ -1,28 +1,24 @@
-var compression = require('compression');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const promisify = require('es6-promisify');
+const flash = require('connect-flash');
+const routes = require('./routes/index');
+const helpers = require('./util/helpers');
+const errorHandlers = require('./handlers/errorHandlers');
 
-var app = express();
-
-// Connect Bot
-require('./controllers/dbConnect');
-require('./controllers/tmiConnect');
-require('./controllers/game');
+const app = express();
+const sessionStore = new session.MemoryStore;
 
 // Views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Middlewares
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// Webpack Dev
+// Handle Front-End Files
 if (app.get('env') === 'development') {
   var webpack = require('webpack');
   var webpackDevMiddleware = require('webpack-dev-middleware');
@@ -37,26 +33,37 @@ if (app.get('env') === 'development') {
   app.use(compression());
 }
 
-// Routes
-var routes = require('./routes/index');
+// Library Middlewares
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({
+    cookie: { maxAge: 60000 },
+    store: sessionStore,
+    saveUninitialized: false,
+    resave: 'true',
+    secret: 'secret'
+}));
+app.use(flash());
+
+// App Global Middleware
+app.use((req, res, next) => {
+  res.locals.h = helpers;
+  res.locals.flashes = req.flash();
+  res.locals.currentPath = req.path;
+  next();
+});
+
+// App Routes
 app.use('/', routes);
 
-// Catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// Handle Errors
+app.use(errorHandlers.notFound);
+app.use(errorHandlers.flashValidationErrors);
+if (app.get('env') === 'development') {
+  app.use(errorHandlers.developmentErrors);
+}
+app.use(errorHandlers.productionErrors);
 
-// Error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;

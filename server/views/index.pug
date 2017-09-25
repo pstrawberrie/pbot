@@ -1,10 +1,14 @@
 extends layouts/default
 
 block content
-  .section.p-3.justify-center
-    h1= character && character.name 
-  
-  if err
-    .section.p-3.justify-center
-      h3.text-error= err
+    if characters
+      .section.p-3.justify-center
+        pre= h.dump(characters)
+    else
+      .section.p-3.justify-center.flex-column
+        h1 Things are empty...
+      .section.p-3.justify-center.flex-column
+        form(method="POST", name="newCharacter", action="/new")
+          input(type="text", name="name")
+          input(type="submit")
     

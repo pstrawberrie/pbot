@@ -1,0 +1,9 @@
+extends layouts/default
+
+block content
+    if character
+      .section.p-3.justify-center
+        h1= character.name
+    else
+      .section.p-3.justify-center.flex-column
+        h1 Something's weird...

@@ -1,21 +1,55 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+mongoose.Promise = global.Promise;
+const mongodbErrorHandler = require('mongoose-mongodb-errors');
 
-var characterSchema = new Schema({
-  name: String,
-  location: String,
-  stats: {
-    hp: Number,
-    ap: Number,
-    mp: Number,
-    def: Number,
-    atk: Number
+const characterSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: 'Name is required!'
   },
-  skills: [String],
-  items: [String],
+  location: {
+    type: String,
+    trim: true,
+    default: "Town Square"
+  },
+  stats: {
+    hp: {
+      type: Number,
+      default: 1
+    },
+    ap: {
+      type: Number,
+      default: 1
+    },
+    mp: {
+      type: Number,
+      default: 1
+    },
+    def: {
+      type: Number,
+      default: 1
+    },
+    atk: {
+      type: Number,
+      default: 1
+    }
+  },
+  skills: {
+    type: Array,
+    default: ['Attack', 'Heal']
+  },
+  items: {
+    type: Array,
+    default: ['Hand Wraps', 'Basic Clothes']
+  },
+  xp: {
+    type:Number,
+    default: 1
+  },
   created_at: Date,
-  updated_at: Date,
-  xp: Number
+  updated_at: Date
 });
 
 // Presave
@@ -26,19 +60,11 @@ characterSchema.pre('save', function(next) {
   this.updated_at = currentDate;
   if (!this.created_at) this.created_at = currentDate;
 
-  // XP Calcs
-  //@TODO: no clue what im doing xD
-  var xpTable = {
-    hp: [100, 250, 699, 1000, 3000, 5000],
-    ap: [200, 450, 699, 1500, 3500, 5500],
-    mp: [500, 1500, 3500, 7800, 12000],
-    def: [500, 1500, 3500, 7800, 12000],
-    atk: [500, 1500, 3500, 7800, 12000]
-  }
+  // More pre-save funcs
 
   next();
+
 });
 
-var Character = mongoose.model('Character', characterSchema);
-
-module.exports = Character;
+characterSchema.plugin(mongodbErrorHandler);
+module.exports = mongoose.model('Character', characterSchema);

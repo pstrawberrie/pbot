@@ -1,27 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-const Character = require('../models/Character');
+const express = require('express');
+const router = express.Router();
+const characterController = require('../controllers/characterController');
+const { catchErrors } = require('../handlers/errorHandlers');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+//Characters
+router.get('/', catchErrors(characterController.getAllCharacters));
+router.get('/character/:name', catchErrors(characterController.getCharacter));
 
-  let character = 'Character Unavailable'
-  Character.findOne({name:'pstrawberrie'}).then(result => {
-    if(result.name === 'pstrawberrie') character = result;
-    res.render('index', {
-      title: 'Home',
-      character
-    });
-  })
-  .catch(err => {
-    res.render('index', {
-      title: 'Home',
-      character
-    });
-  })
-
-
-});
+//New Character
+router.post('/new', catchErrors(characterController.newCharacter));
 
 module.exports = router;

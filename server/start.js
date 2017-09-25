@@ -1,91 +1,21 @@
-#!/usr/bin/env node
+const mongoose = require('mongoose');
+const secret = require('./_config/secret');
 
-/**
- * Module dependencies.
- */
+mongoose.connect(secret.dbString, {useMongoClient: true});
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', (err) => {
+  console.error(`Mongo connection Error:\n ${err.message}`);
+});
 
-var app = require('./app');
-var debug = require('debug')('exp:server');
-var http = require('http');
+// Import Agenda Jobs
+require('./lib/jobs');
 
-/**
- * Get port from environment and store in Express.
- */
+// Import Models
+require('./models/Character');
 
-var port = normalizePort(process.env.PORT || '3003');
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  console.log('Server up: ' + bind);
-  //debug('Listening on ' + bind);
-}
+// Start our app!
+const app = require('./app');
+app.set('port', process.env.PORT || 3003);
+const server = app.listen(app.get('port'), () => {
+  console.log(`Server Up! localhost:${server.address().port}`);
+});
