@@ -4,19 +4,19 @@ block navigation
     div.section.nav-left
       a(href="##").rpgc.health
         span.rpg.rpg8_05 &nbsp;
-        span.text-white 26
+        span.text-white= character && character.stats.hp
       a(href="##").rpgc.action
         span.rpg.rpg1_95 &nbsp;
-        span.text-white 26
+        span.text-white= character && character.stats.ap
       a(href="##").rpgc.mind
         span.rpg.rpg5_19 &nbsp;
-        span.text-white 26
+        span.text-white= character && character.stats.mp
       a(href="##").rpgc.attack
         span.rpg.rpg1_52 &nbsp;
-        span.text-white 13
+        span.text-white= character && character.stats.atk
       a(href="##").rpgc.defense
         span.rpg.rpg8_10 &nbsp;
-        span.text-white 13
+        span.text-white= character && character.stats.def
         
         
         

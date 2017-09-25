@@ -1,15 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var tmiAuth = require('../controllers/tmiAuth');
-
+var mongoose = require('mongoose');
+const Character = require('../models/Character');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const newAuth = tmiAuth.test(req, res, next);
-  if(newAuth) {
-    return res.render('panel', { title: 'Home' });
-  }
-  res.render('index', { title: 'Home' });
+
+  let character = 'Character Unavailable'
+  Character.findOne({name:'pstrawberrie'}).then(result => {
+    if(result.name === 'pstrawberrie') character = result;
+    res.render('index', {
+      title: 'Home',
+      character
+    });
+  })
+  .catch(err => {
+    res.render('index', {
+      title: 'Home',
+      character
+    });
+  })
+
+
 });
 
 module.exports = router;

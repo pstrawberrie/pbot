@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= `${title}`
+    title= `pbot ${character && ' - connected'}`
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='styles/bundle.min.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
@@ -11,15 +11,7 @@ html
       include ../partials/navigation
 
     block messages
-      if locals.flashes
-        .inner
-          .flash-messages
-            - const categories = Object.keys(locals.flashes)
-            each category in categories
-              each message in flashes[category]
-                .flash(class=`flash--${category}`)
-                  p.flash__text!= message
-                  button.flash__remove(onClick="this.parentElement.remove()") &times;
+      
     .content
       block content
 

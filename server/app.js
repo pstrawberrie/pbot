@@ -7,6 +7,11 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+// Connect Bot
+require('./controllers/dbConnect');
+require('./controllers/tmiConnect');
+require('./controllers/game');
+
 // Views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

@@ -2,6 +2,9 @@ extends layouts/default
 
 block content
   .section.p-3.justify-center
-    h1 Initiate?
-      
+    h1= character && character.name 
+  
+  if err
+    .section.p-3.justify-center
+      h3.text-error= err
     
