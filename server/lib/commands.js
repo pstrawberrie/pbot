@@ -1,15 +1,23 @@
+const secret = require('../_config/secret');
 const game = require('./game');
 const chat = require('./irc');
 const h = require('./helpers');
 
 // Define All Commands
 // - Commands should return promises!
-exports.commands = {
+const commands = {
+
+  help(user) {
+    return new Promise((resolve, reject) => {
+
+      chat.action('RPG Commands: !' + Object.keys(commands).join(', !'));
+      resolve();
+    });
+  },
 
   newcharacter(user) {
     return new Promise((resolve, reject) => {
 
-      console.log(`New Character creation for ${user}`);
       game.newCharacter(user)
       .then((result) => {
         resolve();
@@ -17,14 +25,14 @@ exports.commands = {
 
     });
   },
+
   stats(user) {
     return new Promise((resolve, reject) => {
 
-      console.log(`Stats lookup for ${user}`);
       game.getCharacter(user)
       .then((result) => {
         if(result != false) {
-          chat.whisper(user, h.statsString(result.stats));
+          chat.action(user + ' Stats: ' + h.statsString(result.stats));
           resolve();
         } else {
           resolve();
@@ -33,14 +41,14 @@ exports.commands = {
 
     });
   },
+
   items(user)  {
     return new Promise((resolve, reject) => {
 
-      console.log(`Items lookup for ${user}`);
       game.getCharacter(user)
       .then((result) => {
         if(result != false) {
-          chat.whisper(user, h.arrCommaJoin(result.items));
+          chat.action(user + ' Items: ' + h.arrCommaJoin(result.items));
           resolve();
         } else {
           resolve();
@@ -49,14 +57,14 @@ exports.commands = {
 
     });
   },
+
   skills(user) {
     return new Promise((resolve, reject) => {
 
-      console.log(`Skills lookup for ${user}`);
       game.getCharacter(user)
       .then((result) => {
         if(result != false) {
-          chat.whisper(user, h.arrCommaJoin(result.skills));
+          chat.action(user + ' Skills: ' + h.arrCommaJoin(result.skills));
           resolve();
         } else {
           resolve();
@@ -65,21 +73,47 @@ exports.commands = {
 
     });
   },
+
   location(user) {
     return new Promise((resolve, reject) => {
 
-      console.log(`Location lookup for ${user}`);
       game.getCharacter(user)
       .then((result) => {
         if(result != false) {
-          chat.whisper(user, result.location);
+          chat.action(user + ' Location: ' + result.location)
           resolve();
         } else {
           resolve();
         }
+      });
+
+    });
+  },
+
+  play(user) {
+    return new Promise((resolve, reject) => {
+
+      game.setCharacterPlay(user, 1)
+      .then((result) => {
+        chat.action(user + ' is playing');
+        resolve();
+      });
+
+    });
+  },
+
+  quit(user) {
+    return new Promise((resolve, reject) => {
+
+      game.setCharacterPlay(user, 0)
+      .then((result) => {
+        chat.action(user + ' quit');
+        resolve();
       });
 
     });
   }
 
-};
+}
+
+module.exports = commands;

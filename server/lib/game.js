@@ -21,7 +21,7 @@ const game = {
       // Check DB For Character
       Character.findOne({name:username}).then(result => {
         console.log('finding character');
-        if(result.name === usernameString) {
+        if(result && result.name === usernameString) {
           var prettyDate = moment(result.created_at).format('ddd, MMM Do YYYY');
           resolveMsg('You created a character on ' + prettyDate + '. Type !stats');
         }
@@ -51,10 +51,11 @@ const game = {
       // Check DB for character
       Character.findOne({name:username}).then(result => {
         console.log('finding character');//remove
-        if(result.name === username + '') {
+        if(result && result.name === username) {
           resolveCheck(result);
         }
         if(result == null) {
+          chat.whisper(username, 'You don\'t have a character. Make one by typing !newcharacter')
           resolveCheck(false)
         }
 
@@ -66,6 +67,23 @@ const game = {
       })
 
     });
+  },
+
+  setCharacterPlay(username, statusNumber) {
+    return new Promise((resolve, reject) => {
+
+      game.getCharacter(username)
+      .then(result => {
+        if(result && result != false) {
+          result.playing = statusNumber;
+          result.save();
+          resolve(result);
+        } else {
+          resolve(false);
+        }
+      })
+
+    })
   }
 
 }

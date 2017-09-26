@@ -75,9 +75,15 @@ irc.on("chat", function (channel, userstate, message, self) {
 
 // Export a "chat" Object so we can execute chat functions from other files
 // - need this working!
-exports.chat = {
-  whisper(user, msg) {
-    console.log('irc.whisper triggered for' + user + '\n' + msg);
-    irc.whisper(user, msg);
-  }
+exports.whisper = function(user, msg) {
+  console.log('irc.whisper triggered for' + user + '\n' + msg);
+  irc.whisper(user, msg);
+}
+
+exports.whisper = function(user, msg) {
+  irc.whisper(user, msg);
+}
+
+exports.action = function(msg) {
+  irc.action(secret.twitchMainChannel, msg);
 }
