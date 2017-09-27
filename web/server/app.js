@@ -22,7 +22,7 @@ app.set('view engine', 'pug');
 if (app.get('env') === 'development') {
   var webpack = require('webpack');
   var webpackDevMiddleware = require('webpack-dev-middleware');
-  var webpackDevConfig = require('./_config/webpack.dev.config');
+  var webpackDevConfig = require('../webpack.dev.config');
   var compiler = webpack(webpackDevConfig);
   app.use(webpackDevMiddleware(compiler, {
       publicPath: webpackDevConfig.output.publicPath,

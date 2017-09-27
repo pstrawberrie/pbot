@@ -1,5 +1,6 @@
 const secret = require('../_config/secret');
 const util = require('../_shared/util');
+const chalk = require('chalk');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -28,11 +29,15 @@ let requestOptions = {
 const irc = new tmi.client(tmiOptions);
 
 //+ IRC Connect
-irc.connect();
+irc.connect()
+.catch((error) => {
+  console.log('Error connecting to IRC:');
+  console.log(error);
+});
 
 //+ IRC Connected Listener
 irc.on('connected', function() {
-  irc.whisper(secret.botOwner, 'pbot just connected!');
+  irc.whisper(secret.botOwner, 'pbot just connected to ' + secret.twitchChannels);
 });
 
 //+ IRC Disconnected Listener
@@ -51,12 +56,12 @@ irc.on("chat", function (channel, userstate, message, self) {
   requestOptions.json = {
     name: user,
     message,
-    time: new Date.now()
+    time: Date.now()
   }
 
   request(requestOptions, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      console.log('message post success');
+      console.log(`${user} triggered command ${message}`);
     } else {
       console.log('error: ' + error);
       console.log('response: ' + response);
@@ -68,6 +73,16 @@ irc.on("chat", function (channel, userstate, message, self) {
 // HTTP Setup
 const app = express();
 app.use(bodyParser.json());
+app.post('/say', function (req, res) {
+  if(req.body) {
+    console.log('received irc http request on /say');
+    irc.say(secret.twitchMainChannel, req.body.message);
+    res.end();
+  } else {
+    console.log('invalid irc http request on /say');
+    res.end();
+  }
+});
 app.post('/whisper', function (req, res) {
   if(req.body) {
     console.log('received irc http request on /whisper');
@@ -89,5 +104,7 @@ app.post('/action', function (req, res) {
   }
 });
 app.listen(3001, function () {
-  console.log('+++ irc http listening (http://localhost:3001) +++')
+  console.log(
+    chalk.cyan('+++ irc http listening (http://localhost:3001) +++')
+  )
 });

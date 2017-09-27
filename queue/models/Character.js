@@ -42,13 +42,17 @@ const characterSchema = new Schema({
   },
   items: {
     type: Array,
-    default: ['Basic Clothes', 'Sharp Stick']
+    default: ['Basic Clothes']
   },
   xp: {
     type:Number,
     default: 1
   },
   playing: {
+    type: Number,
+    default: 0
+  },
+  dead: {
     type: Number,
     default: 0
   },

@@ -13,8 +13,8 @@ module.exports = {
 
   context: path.join(__dirname, ''), // copy-webpack-plugin output path
   entry: [
-    path.join(__dirname, "../../client/scripts/app.js"), // react,cjs -> js
-    path.join(__dirname, "../../client/styles/index.js") // less -> css
+    path.join(__dirname, "./client/scripts/app.js"), // cjs -> js
+    path.join(__dirname, "./client/styles/index.js") // less -> css
   ],
 
   output: {
@@ -43,8 +43,8 @@ module.exports = {
     //   compress: { warnings: false }
     // }),
     new CopyWebpackPlugin([
-      {from: path.join(__dirname, "../../client/images"), to: "images"},
-      {from: path.join(__dirname, "../../client/fonts"), to: "fonts"}
+      {from: path.join(__dirname, "./client/images"), to: "images"},
+      {from: path.join(__dirname, "./client/fonts"), to: "fonts"}
     ])
   ]
 

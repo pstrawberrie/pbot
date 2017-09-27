@@ -1,4 +1,5 @@
 const secret = require('../_config/secret');
+const chalk = require('chalk');
 const mongoose = require('mongoose');
 const Agenda = require('agenda');
 const express = require('express');
@@ -11,7 +12,11 @@ const messageEntry = require('./jobs/messageEntry');
 // DB Connect
 mongoose.connect(secret.dbString, {useMongoClient: true});
 mongoose.Promise = global.Promise;
-mongoose.connection.once('open', () => {console.log('+++ queue is connected to mongodb +++') })
+mongoose.connection.once('open', () => {
+  console.log(
+    chalk.cyan('+++ queue is connected to mongodb +++')
+  )
+})
 mongoose.connection.on('error', (err) => {
   console.error(`Mongo connection Error:\n ${err.message}`);
 });
@@ -23,7 +28,9 @@ agenda.define('messageEntry', function(job, done) { //define agenda entry job
   done();
 });
 agenda.on('ready', function() { //start agenda on db connect
-  console.log('+++ queue agenda is connected to mongodb +++');
+  console.log(
+    chalk.cyan('+++ queue agenda is connected to mongodb +++')
+  );
   agenda.start();
 });
 agenda.on('error', function(err) { //log any errors connecting to agenda db
@@ -54,5 +61,7 @@ app.post('/queue', function (req, res) {
   }
 });
 app.listen(3000, function () {
-  console.log('+++ queue listening (http://localhost:3000) +++')
+  console.log(
+    chalk.cyan('+++ queue listening (http://localhost:3000) +++')
+  )
 });

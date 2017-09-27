@@ -5,16 +5,16 @@ block content
       .section.p-2.justify-center
         h1= character.name
       .section.p-1.justify-center
-        p
+        p.section.flex-row
           span.rpg.rpg8_05.rpgc.hp #{character.stats.hp}&nbsp;&nbsp;&nbsp;&nbsp;
           span.rpg.rpg1_95.rpgc.ap #{character.stats.ap}&nbsp;&nbsp;&nbsp;&nbsp;
           span.rpg.rpg5_19.rpgc.mp #{character.stats.mp}&nbsp;&nbsp;&nbsp;&nbsp;
           span.rpg.rpg1_52.rpgc.atk #{character.stats.atk}&nbsp;&nbsp;&nbsp;&nbsp;
-          span.rpg.rpg8_05.rpgc.def #{character.stats.def}&nbsp;&nbsp;&nbsp;&nbsp;
-        p Stats: #{h.statsString(character.stats)}
-        p Location: #{character.location}
-        p Items: #{h.arrCommaJoin(character.items)}
-        p Skills: #{h.arrCommaJoin(character.skills)}
+          span.rpg.rpg8_05.rpgc.def #{character.stats.def}
+      .section.flex-column.text-center.pad-1 Stats: #{h.statsString(character.stats)}
+      .section.flex-column.text-center Location: #{character.location}
+      .section.flex-column.text-center.pad-1 Items: #{h.arrCommaJoin(character.items)}
+      .section.flex-column.text-center Skills: #{h.arrCommaJoin(character.skills)}
     else
       .section.p-3.justify-center.flex-column
         h1 Something's weird...

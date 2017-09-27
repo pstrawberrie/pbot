@@ -15,10 +15,10 @@ module.exports = (username, arg1) => {
         `${arg1 ? arg1 : username} doesn't have a character. Type !newcharacter`
       );
     } else {
-      console.log(`Stats for ${arg1 ? arg1 : username}: ${util.statsString(result.stats)}`)
+      console.log(`${arg1 ? arg1 : username} Skills: ${util.arrCommaJoin(result.skills)}`)
       sendMessage(
         'say', null,
-        `${arg1 ? arg1 : username} Stats: ${util.statsString(result.stats)}`
+        `${arg1 ? arg1 : username} Skills: ${util.arrCommaJoin(result.skills)}`
       );
     }
   });

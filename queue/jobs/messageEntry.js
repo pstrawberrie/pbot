@@ -1,8 +1,8 @@
 const newCharacter = require('./newCharacter');
 const getStats = require('./getStats');
-//const getLocation = require('./getLocation');
-//const getItems = require('./getItems');
-//const getSkills = require('./getSkills');
+const getLocation = require('./getLocation');
+const getItems = require('./getItems');
+const getSkills = require('./getSkills');
 
 module.exports = (data) => {
 
@@ -15,7 +15,7 @@ module.exports = (data) => {
   if(commandArr.length >= 2) {arg1 = commandArr[1]}
   if(commandArr.length === 3) {arg2 = commandArr[2]}
 
-  console.log('--------')//remove
+  console.log('--------');
   console.log(user + ' command: ' + command);
   if(arg1 != '') {console.log('argument1: ' + arg1)}
   if(arg2 != '') {console.log('argument2: ' + arg2)}
@@ -32,17 +32,17 @@ module.exports = (data) => {
       getStats(user, arg1);
       break;
 
-    // case "location":
-    //   getLocation(user, arg1);
-    //   break;
-    //
-    // case "items":
-    //   getItems(user, arg1);
-    //   break;
-    //
-    // case "skills":
-    //   getSkills(user, arg1);
-    //   break;
+    case "location":
+      getLocation(user, arg1);
+      break;
+
+    case "items":
+      getItems(user, arg1);
+      break;
+
+    case "skills":
+      getSkills(user, arg1);
+      break;
 
     default:
       console.log('the command "' + command + '" is not registered with the bot')

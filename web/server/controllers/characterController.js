@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Character = mongoose.model('Character');
-const secret = require('../_config/secret');
+const secret = require('../../../_config/secret');
 
 // Get Bow Owner's Character (Default)
 exports.getOwnerCharacter = async (req, res) => {
