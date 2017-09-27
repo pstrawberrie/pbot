@@ -1,3 +1,4 @@
+const secret = require('../_config/secret');
 const mongoose = require('mongoose');
 const Agenda = require('agenda');
 const express = require('express');
@@ -7,22 +8,31 @@ const request = require('request');
 const util = require('../_shared/util');
 const messageEntry = require('./jobs/messageEntry');
 
-const app = express();
-
-
 // DB Connect
-mongoose.connect('mongodb://127.0.0.1/rpg', {useMongoClient: true});
+mongoose.connect(secret.dbString, {useMongoClient: true});
 mongoose.Promise = global.Promise;
+mongoose.connection.once('open', () => {console.log('+++ queue is connected to mongodb +++') })
 mongoose.connection.on('error', (err) => {
   console.error(`Mongo connection Error:\n ${err.message}`);
 });
 
 // Agenda Setup
-const agenda = new Agenda({db:{address:'mongodb://127.0.0.1/rpg'}}); //init agenda
-agenda.on('ready', function() { agenda.start() }); //start agenda on db connect
-agenda.define('messageEntry', function(job, done) {
+const agenda = new Agenda({db:{address:secret.dbString}}); //init agenda
+agenda.define('messageEntry', function(job, done) { //define agenda entry job
   messageEntry(job.attrs.data);
   done();
+});
+agenda.on('ready', function() { //start agenda on db connect
+  console.log('+++ queue agenda is connected to mongodb +++');
+  agenda.start();
+});
+agenda.on('error', function(err) { //log any errors connecting to agenda db
+  console.log('queue failed to connect to agenda!!');
+  console.log(err);
+});
+agenda.on('fail', function(err, job) { //log failed agenda jobs
+  console.log('Agenda job "' + job.attrs.name + '" failed!');
+  console.log('Error String: ' + err);
 });
 function graceful() {
   agenda.stop(function() { process.exit(0); });
@@ -30,30 +40,8 @@ function graceful() {
 process.on('SIGTERM', graceful);
 process.on('SIGINT' , graceful);
 
-// Post A Whisper
-//@TODO: Clean this up (split it out into separate func/file)
-//!!!!!!!!!!!!!!
-function sendWhisper(user, message) {
-  const requestOptions = {
-    uri: 'http://localhost:3001/msg',
-    method: 'POST'
-  }
-  requestOptions.json = {
-    name: user,
-    message
-  }
-  request(requestOptions, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      console.log('message post success');
-    } else {
-      console.log('error: ' + error);
-      console.log('response: ' + response);
-    }
-  });
-}
-sendWhisper('pstrawberrie', 'HEY BROE GET UR SHIT TOEGETRHER');
-
 // HTTP Setup
+const app = express();
 app.use(bodyParser.json());
 app.post('/queue', function (req, res) {
   if(req.body && req.body.name && req.body.message && util.validMessage(req.body.message)) {
@@ -66,5 +54,5 @@ app.post('/queue', function (req, res) {
   }
 });
 app.listen(3000, function () {
-  console.log('-- queue listening --')
+  console.log('+++ queue listening (http://localhost:3000) +++')
 });

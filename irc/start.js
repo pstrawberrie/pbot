@@ -25,8 +25,6 @@ let requestOptions = {
   uri: 'http://localhost:3000/queue',
   method: 'POST'
 }
-
-const passWhispers = 0;
 const irc = new tmi.client(tmiOptions);
 
 //+ IRC Connect
@@ -42,7 +40,7 @@ irc.on('disconnected', function() {
   irc.whisper(secret.botOwner, 'pbot just disconnected!');
 });
 
-//+ IRC Chat Listener
+//+ IRC Chat Listener (this is the juicy part)
 irc.on("chat", function (channel, userstate, message, self) {
 
   // Make sure this is a "!" command, and that the bot didn't send it
@@ -52,7 +50,8 @@ irc.on("chat", function (channel, userstate, message, self) {
   const user = userstate.username;
   requestOptions.json = {
     name: user,
-    message
+    message,
+    time: new Date.now()
   }
 
   request(requestOptions, function (error, response, body) {
@@ -69,16 +68,26 @@ irc.on("chat", function (channel, userstate, message, self) {
 // HTTP Setup
 const app = express();
 app.use(bodyParser.json());
-app.post('/msg', function (req, res) {
-  if(req.body ) {
-    console.log('received irc http request');
-    console.log(req.body);
+app.post('/whisper', function (req, res) {
+  if(req.body) {
+    console.log('received irc http request on /whisper');
+    irc.whisper(req.body.user, req.body.message);
     res.end();
   } else {
-    console.log('invalid irc http request');
+    console.log('invalid irc http request on /whisper');
+    res.end();
+  }
+});
+app.post('/action', function (req, res) {
+  if(req.body) {
+    console.log('received irc http request on /action');
+    irc.action(secret.twitchMainChannel, req.body.message);
+    res.end();
+  } else {
+    console.log('invalid irc http request on /action');
     res.end();
   }
 });
 app.listen(3001, function () {
-  console.log('-- irc http listening (http://localhost:3001) --')
+  console.log('+++ irc http listening (http://localhost:3001) +++')
 });

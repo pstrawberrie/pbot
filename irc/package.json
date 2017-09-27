@@ -8,12 +8,14 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "agenda": "^1.0.0",
     "body-parser": "^1.18.2",
     "express": "^4.15.5",
     "request": "^2.82.0",
     "tmi.js": "^1.2.1"
   },
   "scripts": {
-    "start": "nodemon -e js ./start.js --colors"
+    "start": "nodemon -e js ./test.js --colors",
+    "connect": "nodemon -e js ./start.js --colors"
   }
 }

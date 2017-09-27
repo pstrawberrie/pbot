@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>message testing</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 500px;
+        height: 100%;
+        margin: auto;
+        box-sizing: border-box;
+        background: #f0f0f0;
+      }
+
+      #display {
+        with: 100%;
+        height: 90%;
+        padding: 3px;
+        border: 5px solid #ff00ff;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      #message {
+        width: 100%;
+        height: 10%;
+        border: 5px solid #ff00ff;
+        border-top: 0;
+        font-size: 24px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        background: #f0f0f0;
+      }
+
+      #display .message {
+        padding: 3px;
+        display: block;
+        margin-bottom: 4px;
+        box-sizing: border-box;
+      }
+
+      #user {
+        position: absolute;
+        bottom: 2px;
+        left: 2px;
+        font-size: 24px;
+        border: 5px solid #00ff00;
+        background: #fff;
+        padding: 0 10px;
+        height: 10%;
+      }
+
+      span.name {
+        display: inline-block;
+        padding: 3px;
+        background: #333;
+        color: #fff;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div id="display"></div>
+      <input type="text" id="user" value="user123">
+      <input type="text" id="message" placeholder="type in here and press enter to send">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $('#message').on('keyup', function(e) {
+        if (e.which != 13) return;
+        let msgJson = {
+          name: $('#user').val(),
+          message: $('#message').val()
+        }
+        console.log(JSON.stringify(msgJson));
+        $.ajax({
+          type: "POST",
+          url: '/msg',
+          contentType: 'application/json',
+          dataType: 'json',
+          async: false,
+          data: JSON.stringify(msgJson)
+        });
+        $('#display').append('<div class="message"><span class="name">' + msgJson.name + '</span> &rsaquo; ' + msgJson.message + '</div>');
+        $('#message').val('');
+      })
+
+    </script>
+
+  </body>
+
+</html>

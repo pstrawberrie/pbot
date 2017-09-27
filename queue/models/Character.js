@@ -42,7 +42,7 @@ const characterSchema = new Schema({
   },
   items: {
     type: Array,
-    default: ['Hand Wraps', 'Basic Clothes']
+    default: ['Basic Clothes', 'Sharp Stick']
   },
   xp: {
     type:Number,
