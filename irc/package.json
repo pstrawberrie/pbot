@@ -1,20 +1,19 @@
 {
   "name": "pbot",
   "version": "1.0.0",
-  "description": "A Twitch Bot Prototype",
+  "description": "Twitch Bot Prototype",
   "main": "start.js",
   "repository": "https://github.com/pstrawberrie/pbot",
   "author": "pstrawberrie",
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "agenda": "^1.0.0",
     "body-parser": "^1.18.2",
     "express": "^4.15.5",
-    "mongoose": "^4.11.13",
-    "mongoose-mongodb-errors": "^0.0.2"
+    "request": "^2.82.0",
+    "tmi.js": "^1.2.1"
   },
   "scripts": {
-    "start": "node start.js --colors"
+    "start": "nodemon -e js ./start.js --colors"
   }
 }
