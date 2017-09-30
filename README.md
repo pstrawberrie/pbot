@@ -20,6 +20,12 @@ cd ../web && yarn install (not working yet, skip this for now)
 
 ----------------------------------
 
+## Needs to be implemented
+- alive/dead (+ command)
+
+## Ideas
+- everytime u send a command for the first time u get points. resets each week. from jack
+
 ## Credits
 The RPG Icons this project uses are from here:  
 [https://opengameart.org/content/rpg-icon-font](https://opengameart.org/content/rpg-icon-font)  

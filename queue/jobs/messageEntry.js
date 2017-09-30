@@ -3,6 +3,9 @@ const getStats = require('./getStats');
 const getLocation = require('./getLocation');
 const getItems = require('./getItems');
 const getSkills = require('./getSkills');
+const help = require('./help');
+const locations = require('./locations');
+const moveCharacter = require('./moveCharacter');
 
 module.exports = (data) => {
 
@@ -10,7 +13,7 @@ module.exports = (data) => {
   const msg = data.message;
   const date = data.date;
   const commandArr = data.message.split(' ');
-  const command = commandArr[0].substr(1,commandArr[0].length);
+  const command = commandArr[0].substr(1,commandArr[0].length).toLowerCase();
   let arg1 = '', arg2 = '';
   if(commandArr.length >= 2) {arg1 = commandArr[1]}
   if(commandArr.length === 3) {arg2 = commandArr[2]}
@@ -23,8 +26,12 @@ module.exports = (data) => {
   // Forward the command to the appropriate function
   switch (command) {
 
+    case "help":
+    case "commands":
+      help(arg1);
+      break;
+
     case "newcharacter":
-    case "newCharacter":
       newCharacter(user);
       break;
 
@@ -33,7 +40,12 @@ module.exports = (data) => {
       break;
 
     case "location":
+    case "where":
       getLocation(user, arg1);
+      break;
+
+    case "locations":
+      locations();
       break;
 
     case "items":
@@ -43,6 +55,10 @@ module.exports = (data) => {
     case "skills":
       getSkills(user, arg1);
       break;
+
+    case "move":
+    case "goto":
+      moveCharacter(user, arg1);
 
     default:
       console.log('the command "' + command + '" is not registered with the bot')

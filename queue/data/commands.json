@@ -1,0 +1,10 @@
+{
+  "help" : "list all commands",
+  "newcharacter" : "create a new character",
+  "stats" : "show your character's stats",
+  "location" : "show your character's location",
+  "locations" : "show all available locations",
+  "move [location]" : "move your character to a new location",
+  "items" : "show your character's items",
+  "skills" : "show your character's skills"
+}
