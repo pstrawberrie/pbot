@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 
-const characterSchema = new mongoose.Schema({
+const monsterSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -11,20 +11,20 @@ const characterSchema = new mongoose.Schema({
   location: {
     type: String,
     trim: true,
-    default: "town_square"
+    default: "dangerous_field"
   },
   stats: {
     hp: {
       type: Number,
-      default: 10
+      default: 5
     },
     ap: {
       type: Number,
-      default: 3
+      default: 1
     },
     mp: {
       type: Number,
-      default: 3
+      default: 1
     },
     def: {
       type: Number,
@@ -32,12 +32,12 @@ const characterSchema = new mongoose.Schema({
     },
     atk: {
       type: Number,
-      default: 2
+      default: 1
     }
   },
   skills: {
     type: Array,
-    default: ['attack', 'heal']
+    default: ['attack']
   },
   items: {
     type: Array,
@@ -51,13 +51,12 @@ const characterSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  last_move: Date,
   created_at: Date,
   updated_at: Date
 });
 
 // Presave
-characterSchema.pre('save', function(next) {
+monsterSchema.pre('save', function(next) {
 
   // Dates
   var currentDate = new Date();
@@ -70,5 +69,5 @@ characterSchema.pre('save', function(next) {
 
 });
 
-characterSchema.plugin(mongodbErrorHandler);
-module.exports = mongoose.model('Character', characterSchema);
+monsterSchema.plugin(mongodbErrorHandler);
+module.exports = mongoose.model('Monster', monsterSchema);

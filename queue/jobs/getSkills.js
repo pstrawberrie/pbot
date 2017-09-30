@@ -1,6 +1,6 @@
 const util = require('../../_shared/util');
 const mongoose = require('mongoose');
-const Character = require('../models/Character');
+const Character = mongoose.model('Character');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 

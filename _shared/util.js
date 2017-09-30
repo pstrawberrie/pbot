@@ -9,6 +9,14 @@ exports.arrCommaJoin = (arr) => {
   return arr.join(', ');
 }
 
+// Make understore locations pretty
+exports.prettyLocation = (location) => {
+  let arr = location.split('_').join(' ');
+  return arr.toLowerCase().replace(/^\w|\s\w/g, function (letter) {
+    return letter.toUpperCase();
+  })
+}
+
 // Get Stats String from Character obj
 exports.statsString = (characterObj) => {
   const string = characterObj.hp + 'HP / ' +
@@ -17,4 +25,20 @@ exports.statsString = (characterObj) => {
   characterObj.atk + 'ATK / ' +
   characterObj.def + 'DEF';
   return string;
+}
+
+// Calc Stats From Item
+exports.calcStatsFromItem = (directive, currentStats, itemsArr, item) => {
+  if(directive === 'add') {
+    for(let stat of Object.keys(currentStats)) {
+    	currentStats[stat] = currentStats[stat] + itemsArr[item][stat];
+    }
+    return currentStats;
+  }
+  if(directive === 'subtract') {
+    for(let stat of Object.keys(currentStats)) {
+    	currentStats[stat] = currentStats[stat] - itemsArr[item][stat]
+    }
+    return currentStats;
+  }
 }

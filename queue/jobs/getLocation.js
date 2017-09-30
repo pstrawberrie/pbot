@@ -1,5 +1,6 @@
+const util = require('../../_shared/util');
 const mongoose = require('mongoose');
-const Character = require('../models/Character');
+const Character = mongoose.model('Character');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 
@@ -14,10 +15,10 @@ module.exports = (username, arg1) => {
         `${arg1 ? arg1 : username} doesn't have a character. Type !newcharacter`
       );
     } else {
-      console.log(`${arg1 ? arg1 : username} Location: ${result.location}`)
+      console.log(`${arg1 ? arg1 : username} Location: ${util.prettyLocation(result.location)}`)
       sendMessage(
         'say', null,
-        `${arg1 ? arg1 : username} Location: ${result.location}`
+        `${arg1 ? arg1 : username} Location: ${util.prettyLocation(result.location)}`
       );
     }
   });

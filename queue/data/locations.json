@@ -1,7 +1,9 @@
 [
-  "townsquare",
-  "fieldoutsidetown",
-  "firedungeon",
-  "icedungeon",
-  "infinitetrain"
+  "town_square",
+  "fire_cave",
+  "ice_cave",
+  "wind_cave",
+  "earth_cave",
+  "dangerous_field",
+  "infinite_train"
 ]

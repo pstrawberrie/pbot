@@ -1,0 +1,23 @@
+{
+  "basic_clothes": {
+    "hp":1,
+    "def":1
+  },
+  "robe": {
+    "hp":5,
+    "def":5,
+    "mp":5
+  },
+  "boots": {
+    "hp":1,
+    "ap":5,
+    "def":1
+  },
+  "hype_cape": {
+    "hp":5,
+    "ap":5,
+    "mp":5,
+    "atk":5,
+    "def":5
+  }
+}

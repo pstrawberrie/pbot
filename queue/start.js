@@ -1,13 +1,8 @@
 const secret = require('../_config/secret');
+const util = require('../_shared/util');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const Agenda = require('agenda');
-const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('request');
-
-const util = require('../_shared/util');
-const messageEntry = require('./jobs/messageEntry');
 
 // DB Connect
 mongoose.connect(secret.dbString, {useMongoClient: true});
@@ -16,10 +11,19 @@ mongoose.connection.once('open', () => {
   console.log(
     chalk.cyan('+++ queue is connected to mongodb +++')
   )
-})
+});
 mongoose.connection.on('error', (err) => {
   console.error(`Mongo connection Error:\n ${err.message}`);
 });
+
+// Models
+require('./models/Character');
+require('./models/Monster');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request');
+const messageEntry = require('./jobs/messageEntry');
 
 // Agenda Setup
 const agenda = new Agenda({db:{address:secret.dbString}}); //init agenda

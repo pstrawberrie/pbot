@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Character = require('../models/Character');
+const Character = mongoose.model('Character');
 
 module.exports = (username) => {
   return new Promise((resolve, reject) => {

@@ -1,10 +1,11 @@
 {
-  "help" : "list all commands",
-  "newcharacter" : "create a new character",
-  "stats" : "show your character's stats",
-  "location" : "show your character's location",
-  "locations" : "show all available locations",
-  "move [location]" : "move your character to a new location",
-  "items" : "show your character's items",
-  "skills" : "show your character's skills"
+  "love" : "does some <3 love <3 (!love, !love user, !love user1 user2)",
+  "help" : "lists all commands",
+  "newcharacter" : "creates a new character",
+  "stats" : "shows your character's stats",
+  "where" : "shows your character's location",
+  "locations" : "shows all available locations",
+  "move" : "moves your character to a new location (!move town_square)",
+  "items" : "shows your character's items",
+  "skills" : "shows your character's skills"
 }

@@ -1,6 +1,6 @@
 const moment = require('moment');
 const mongoose = require('mongoose');
-const Character = require('../models/Character');
+const Character = mongoose.model('Character');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 
@@ -18,7 +18,7 @@ module.exports = (username) => {
       );
     }
     if(result == null) {
-      const newSheet = new Character ({name: username});
+      const newSheet = new Character({name: username});
       newSheet.save()
       .then((result) => {
         console.log('Made new character: ' + username);
