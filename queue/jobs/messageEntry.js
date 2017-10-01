@@ -14,6 +14,7 @@ const isCharacterDead = require('./isCharacterDead');
 const characterLook = require('./characterLook');
 const moveMonster = require('./moveMonster');
 const characterAttack = require('./characterAttack');
+const resCharacter = require('./reviveCharacter');
 
 module.exports = (data) => {
 
@@ -55,7 +56,7 @@ module.exports = (data) => {
       break;
 
     case "stats":
-      getStats(user, arg1);
+      getStats(user, arg1, arg2);
       break;
 
     case "location":
@@ -106,6 +107,13 @@ module.exports = (data) => {
         moveMonster(arg1, arg2);
       }
       break;
+
+    case "res":
+      if(user === secret.botOwner) {
+        resCharacter(user, arg1);
+      }
+      break;
+
 
     default:
       console.log('the command "' + command + '" is not registered with the bot')

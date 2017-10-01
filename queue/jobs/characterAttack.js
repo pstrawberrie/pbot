@@ -46,6 +46,12 @@ module.exports = (username, arg1, arg2) => {
     } else {
       let characterUpdate = {name: username};
 
+      // Sanctuary Check
+      if(characterResult.location === 'sanctuary') {
+        sendMessage( 'action', null, `The Sanctuary glows bright, strengthened by adversity`);
+        return;
+      }
+
       // Cooldown Check
       let cooldown = attackAllowed(characterResult.stats.ap, characterResult.last_attack);
       if(!characterResult.last_attack) {
@@ -82,7 +88,7 @@ module.exports = (username, arg1, arg2) => {
               ); return;
             }
             //-do attack
-            makeAttack('monster', characterResult, monsterResult[0]);
+            makeAttack('characterVsMonster', characterResult, monsterResult[0]);
             if(characterUpdate.last_attack) {
               Character.findOneAndUpdate({name:username}, characterUpdate)//update cd
               .then(result => {console.log('updated attack cd')})
@@ -105,7 +111,7 @@ module.exports = (username, arg1, arg2) => {
               ); return;
             }
             //-do attack
-            makeAttack('character', characterResult, enemyResult[0]);
+            makeAttack('characterVsCharacter', characterResult, enemyResult[0]);
             if(characterUpdate.last_attack) {
               Character.findOneAndUpdate({name:username}, characterUpdate)//update cd
               .then(result => {console.log('updated attack cd')})
@@ -113,7 +119,7 @@ module.exports = (username, arg1, arg2) => {
             }
           } else {
             sendMessage('say', null,
-              `${username} - you can only attack characters or monsters`
+              `${username} - you can only attack characters or monsters (!attack [character] or !attack monster [monster])`
             ); return;
           }
         }).catch(err => {console.log('Err getting enemy player\n' + err)})

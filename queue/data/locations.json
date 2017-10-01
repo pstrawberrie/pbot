@@ -1,10 +1,13 @@
 [
+  "sanctuary",
   "town_square",
+  "forest",
   "graveyard",
   "fire_cave",
   "ice_cave",
   "wind_cave",
   "earth_cave",
   "dangerous_field",
-  "infinite_train"
+  "infinite_train",
+  "death_pit"
 ]

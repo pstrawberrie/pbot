@@ -42,3 +42,35 @@ exports.calcStatsFromItem = (directive, currentStats, itemsArr, item) => {
     return currentStats;
   }
 }
+
+// Calc Stats From Items
+exports.calcStatsFromItems = (itemsObj, characterItems) => {
+  let statsObj = {};
+  for(let item of characterItems) {
+    statsObj.hp = (statsObj.hp || 0) + (itemsObj[item].hp || 0);
+    statsObj.ap = (statsObj.ap || 0) + (itemsObj[item].ap || 0);
+    statsObj.mp = (statsObj.mp || 0) + (itemsObj[item].mp || 0);
+    statsObj.atk = (statsObj.atk || 0) + (itemsObj[item].atk || 0);
+    statsObj.def = (statsObj.def || 0) + (itemsObj[item].def || 0);
+  }
+  console.log(statsObj);
+  return statsObj;
+}
+
+// Turn negative number to 0
+exports.negativeToZero = number => {
+  if(number < 0) {
+    return 0
+  } else {
+    return Math.floor(number);
+  }
+}
+
+// Turn negative number to 1
+exports.negativeToOne = number => {
+  if(Math.floor(number) < 1) {
+    return 1
+  } else {
+    return Math.ceil(number);
+  }
+}

@@ -6,6 +6,7 @@ const Location = mongoose.model('Location');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 const locations = require('../data/locations.json');
+const items = require('../data/items.json');
 
 // Has Been 1 minute
 const minutePassed = (lastUpdate) => {
@@ -102,11 +103,17 @@ module.exports = (username, arg1) => {
       })
 
       // update character
+      if(arg1 === 'sanctuary') {
+        console.log(`${username} went to sanctuary`);
+        update.stats = util.calcStatsFromItems(items, result.items);
+        sendMessage(
+          'action', null, `The Sanctuary warms your soul, ${username}`
+        );
+      }
       const updatedCharacter= Character.update({ name: username }, update,
       { new: true }).exec();
       sendMessage(
-        'say',
-        null,
+        'say', null,
         `${username} moved to ${util.prettyLocation(arg1)}`
       );
     }

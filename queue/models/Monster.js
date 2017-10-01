@@ -27,7 +27,7 @@ const monsterSchema = new mongoose.Schema({
     },
     def: {
       type: Number,
-      default: 0
+      default: 2
     },
     atk: {
       type: Number,
@@ -46,8 +46,14 @@ const monsterSchema = new mongoose.Schema({
   last_move: Date,
   last_attack: Date,
   last_target: String,
-  totalDeaths: Number,
-  totalTimesRevived: Number,
+  totalDeaths: {
+    type:Number,
+    default:0
+  },
+  totalTimesRevived: {
+    type:Number,
+    default:0
+  },
   created_at: Date,
   updated_at: Date
 });

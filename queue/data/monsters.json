@@ -1,14 +1,56 @@
 [
   {
+    "name": "poring1",
+    "location": "forest"
+  },
+  {
+    "name": "poring2",
+    "location": "forest"
+  },
+  {
+    "name": "poring3",
+    "location": "forest"
+  },
+  {
+    "name": "poring4",
+    "location": "forest"
+  },
+  {
+    "name": "poring5",
+    "location": "forest"
+  },
+  {
+    "name": "poring6",
+    "location": "forest"
+  },
+  {
+    "name": "poring7",
+    "location": "forest"
+  },
+  {
+    "name": "poring8",
+    "location": "forest"
+  },
+  {
+    "name": "poring9",
+    "location": "forest"
+  },
+  {
+    "name": "poring10",
+    "location": "forest"
+  },
+  {
     "name": "zombie",
-    "location": "graveyard"
+    "location": "graveyard",
+    "stats": {
+      "hp": 13
+    }
   },
   {
     "name": "training_dummy",
     "location": "town_square",
     "stats": {
-      "hp":99999,
-      "def":1,
+      "hp":9999969,
       "atk":0
     }
   },
@@ -16,7 +58,7 @@
     "name": "wraith",
     "location": "graveyard",
     "stats": {
-      "hp":25,
+      "hp":60,
       "def":5,
       "atk":5
     }
