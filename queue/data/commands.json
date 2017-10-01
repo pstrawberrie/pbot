@@ -3,9 +3,11 @@
   "help" : "lists all commands",
   "newcharacter" : "creates a new character",
   "stats" : "shows your character's stats",
+  "alive" : "shows if your character is alive or dead",
   "where" : "shows your character's location",
   "locations" : "shows all available locations",
   "move" : "moves your character to a new location (!move town_square)",
+  "look" : "shows information about your current location",
   "items" : "shows your character's items",
   "skills" : "shows your character's skills"
 }

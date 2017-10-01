@@ -10,8 +10,7 @@ const monsterSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    trim: true,
-    default: "dangerous_field"
+    trim: true
   },
   stats: {
     hp: {
@@ -28,7 +27,7 @@ const monsterSchema = new mongoose.Schema({
     },
     def: {
       type: Number,
-      default: 1
+      default: 0
     },
     atk: {
       type: Number,
@@ -39,18 +38,16 @@ const monsterSchema = new mongoose.Schema({
     type: Array,
     default: ['attack']
   },
-  items: {
-    type: Array,
-    default: ['basic_clothes']
-  },
-  xp: {
-    type:Number,
-    default: 1
-  },
+  drops: Array,
   dead: {
     type: Number,
     default: 0
   },
+  last_move: Date,
+  last_attack: Date,
+  last_target: String,
+  totalDeaths: Number,
+  totalTimesRevived: Number,
   created_at: Date,
   updated_at: Date
 });

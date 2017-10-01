@@ -10,6 +10,10 @@ const getSkills = require('./getSkills');
 const locations = require('./locations');
 const moveCharacter = require('./moveCharacter');
 const characterItem = require('./characterItem');
+const isCharacterDead = require('./isCharacterDead');
+const characterLook = require('./characterLook');
+const moveMonster = require('./moveMonster');
+const characterAttack = require('./characterAttack');
 
 module.exports = (data) => {
 
@@ -34,12 +38,20 @@ module.exports = (data) => {
       love(user, arg1, arg2);
       break;
 
+    case "squid":
+      squid(arg1);
+      break;
+
     case "help":
       help(arg1);
       break;
 
     case "newcharacter":
       newCharacter(user);
+      break;
+
+    case "alive":
+      isCharacterDead('command', user, arg1);
       break;
 
     case "stats":
@@ -68,8 +80,12 @@ module.exports = (data) => {
       moveCharacter(user, arg1);
       break;
 
-    case "squid":
-      squid(arg1);
+    case "look":
+      characterLook(user, arg1);
+      break;
+
+    case "attack":
+      characterAttack(user, arg1, arg2);
       break;
 
     //+ Admin commands
@@ -82,6 +98,12 @@ module.exports = (data) => {
     case "removeitem":
       if(user === secret.botOwner) {
         characterItem('remove', arg1, arg2);
+      }
+      break;
+
+    case "movemonster":
+      if(user === secret.botOwner) {
+        moveMonster(arg1, arg2);
       }
       break;
 

@@ -19,6 +19,127 @@ mongoose.connection.on('error', (err) => {
 // Models
 require('./models/Character');
 require('./models/Monster');
+require('./models/Location');
+
+// Populate a new DB?
+const populate = 0;
+if(populate === 1) {
+  const locations = require('./data/locations.json');
+  const Location = mongoose.model('Location');
+  const monsters = require('./data/monsters.json');
+  const Monster = mongoose.model('Monster');
+  const Character = mongoose.model('Character');
+
+  //+ DB Populate (async/await)
+
+  //1. Remove all locations
+  function removeAllLocations() {
+    return Location.remove({})
+    .then((result) => {
+      return result
+    }).catch((err) => {
+      return err
+    })
+  }
+
+  //2. Create locations obj to import (incl. monsters + characters)
+  function createLocationObj() {
+    let newLocations = [];
+    return new Promise((resolve, reject) => {
+      for(let location of locations) {
+        newLocations.push({name:location, monsters:[]})
+      }
+      for(let monster of monsters) {
+        let monstername = monster.name;
+        let monsterlocation = monster.location
+        for(let i of newLocations) {
+          if(i.name === monsterlocation) {
+            i.monsters.push(monstername)
+          }
+        }
+        if(monsters.indexOf(monster) === monsters.length - 1) {
+          return resolve(newLocations);
+        }
+      }
+    })
+  }
+
+  //2.5 Make Characters object to populate (again) to locations
+  function addCharacters(newLocations) {
+    return new Promise((resolve, reject) => {
+      Character.find({})
+      .then((result) => {
+        if(result == null) {
+          return resolve(newLocations);
+        }
+        let characterLocations = {};
+        for(let location of locations) {
+          if(!characterLocations[location]) {
+            characterLocations[location] = []
+          }
+        }
+        for(let character of result) {
+          characterLocations[character.location].push(character.name);
+        }
+        for(let dbObj of newLocations) {
+          let arrIndex = newLocations.indexOf(dbObj);
+          newLocations[arrIndex].characters = [...characterLocations[dbObj.name]]
+        }
+        return resolve(newLocations);
+      }).catch((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  //3. Populate new locations
+  function populateLocations(newLocations) {
+    return Location.create(newLocations)
+    .then((result) => { console.log(chalk.gray('++ Populated New Locations ++')); return result })
+    .catch((err) => { console.log('Error populating DB\n' + err); return err })
+  }
+
+  //4. Remove all monsters
+  function removeAllMonsters() {
+    return Monster.remove({})
+    .then((result) => {
+      return result
+    }).catch((err) => {
+      return err
+    })
+  }
+
+  //5. Populate monsters (straight import from json obj)
+  function populateMonsters() {
+    return Monster.create(monsters)
+    .then((result) => { console.log(chalk.gray('++ Populated New Monsters ++')); return result })
+    .catch((err) => { console.log(err); return err })
+  }
+
+  //6. Run Populate
+  async function runPopulate() {
+    try {
+      await removeAllLocations();
+      const firstLocationObj = await createLocationObj();
+      const lastLocationObj = await addCharacters(firstLocationObj);
+      await populateLocations(lastLocationObj);
+      await removeAllMonsters();
+      await populateMonsters();
+      console.log(chalk.cyan(`+++ DB Population Finished +++`))
+    } catch(err) {
+      console.log(chalk.red('xxx Error Populating DB xxx'));
+      console.log(err);
+    }
+  }
+
+  runPopulate();
+}
+
+// Run any tests?
+const tests = 0;
+if(tests === 1) {
+  console.log(chalk.magenta('+++ Tests +++'))
+}
 
 const express = require('express');
 const bodyParser = require('body-parser');

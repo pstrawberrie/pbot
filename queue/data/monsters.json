@@ -1,0 +1,78 @@
+[
+  {
+    "name": "zombie",
+    "location": "graveyard"
+  },
+  {
+    "name": "training_dummy",
+    "location": "town_square",
+    "stats": {
+      "hp":99999,
+      "def":1,
+      "atk":0
+    }
+  },
+  {
+    "name": "wraith",
+    "location": "graveyard",
+    "stats": {
+      "hp":25,
+      "def":5,
+      "atk":5
+    }
+  },
+  {
+    "name": "fire_boss",
+    "location": "fire_cave",
+    "stats": {
+      "hp":100,
+      "def":10,
+      "atk":10
+    }
+  },
+  {
+    "name": "ice_boss",
+    "location": "ice_cave",
+    "stats": {
+      "hp":100,
+      "def":10,
+      "atk":10
+    }
+  },
+  {
+    "name": "wind_boss",
+    "location": "wind_cave",
+    "stats": {
+      "hp":100,
+      "def":10,
+      "atk":10
+    }
+  },
+  {
+    "name": "earth_boss",
+    "location": "earth_cave",
+    "stats": {
+      "hp":100,
+      "def":10,
+      "atk":10
+    }
+  },
+  {
+    "name": "alien",
+    "location": "dangerous_field",
+    "stats": {
+      "hp":300,
+      "def":15,
+      "atk":12
+    }
+  },
+  {
+    "name": "spork_boss",
+    "location": "infinite_train",
+    "stats": {
+      "hp":500,
+      "def":20,
+      "atk":20
+    }
+  }
+]

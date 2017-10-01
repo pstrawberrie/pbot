@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const Character = mongoose.model('Character');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
+const characterItem = require('./characterItem');
+const moveCharacter = require('./moveCharacter');
 
 module.exports = (username) => {
 
@@ -22,6 +24,10 @@ module.exports = (username) => {
       newSheet.save()
       .then((result) => {
         console.log('Made new character: ' + username);
+        //do default character actions
+        characterItem('give', username, 'basic_clothes');
+        moveCharacter(username, 'town_square');
+        //send welcome
         sendMessage(
           'say',
           null,

@@ -10,8 +10,7 @@ module.exports = (username) => {
     Character.findOne({name:username}).then(result => {
       console.log('Finding character: ' + username);//remove
       if(result && result.name === username) {
-        console.log('Got Character ' + username + ':');
-        console.log(result);
+        console.log('Got ' + username);
         resolver(result);
       }
       if(result == null) {
