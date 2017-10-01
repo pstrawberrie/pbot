@@ -1,7 +1,6 @@
 # pbot
-Twitch Chat Bot prototype    
+Twitch Chat Bot **_prototype_**  
 Developing on node 8.5.0  
-*this is not complete*  
 
 ## Try it out
 **1. Get the repo and install dependencies**  
@@ -20,11 +19,26 @@ cd ../web && yarn install (not working yet, skip this for now)
 
 ----------------------------------
 
+## Working so far
+- Basic commands (use !help for list)
+- Make new character
+- Move around
+- Look
+- Attack monsters (+ cooldown based on ap)
+- Sanctuary (healz u, m8)
+- Dying & Death restrictions (no move/attack)
+- Rez (admin only)
+
 ## Needs to be implemented
-- alive/dead (+ command)
+- Heal
+- Attack characters
+- monster drop + item pickup
+- monster rez cron
+- player rez cron ("A Healing Wind sweeps over the land")
 
 ## Ideas
-- everytime u send a command for the first time u get points. resets each week. from jack
+- jack - "points for commands"
+  - everytime u send a command for the first time u get points. resets each week
 
 ## Credits
 The RPG Icons this project uses are from here:  
