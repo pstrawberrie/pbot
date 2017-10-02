@@ -1,45 +1,21 @@
 {
-  "name": "webpack-express",
-  "engines": {
-    "node": ">=8.5.0"
-  },
-  "engineStrict": true,
+  "name": "sockets",
   "version": "1.0.0",
-  "description": "Webpack + Express boilerplate",
-  "main": "server/start.js",
-  "repository": "https://github.com/pstrawberrie/boilerplates",
-  "author": "pstrawberrie",
+  "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "start": "nodemon -e js,pug ./server/start.js",
-    "build": "webpack --config ./server/_config/webpack.config.js"
-  },
   "dependencies": {
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.18.2",
     "chalk": "^2.1.0",
-    "compression": "^1.7.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "es6-promisify": "^5.0.0",
-    "express": "^4.15.4",
-    "express-session": "^1.15.5",
+    "express": "^4.16.1",
+    "less-middleware": "^2.2.1",
     "moment": "^2.18.1",
-    "mongoose": "^4.11.12",
+    "mongoose": "^4.11.14",
     "mongoose-mongodb-errors": "^0.0.2",
     "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0",
     "socket.io": "^2.0.3"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "json-loader": "^0.5.7",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
-    "webpack": "^3.6.0",
-    "webpack-dev-middleware": "^1.12.0"
+  "scripts": {
+    "start": "nodemon -e js --ignore /client ./start.js --colors"
   }
 }

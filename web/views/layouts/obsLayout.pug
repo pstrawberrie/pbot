@@ -1,0 +1,15 @@
+doctype html 
+html
+  head
+    title= `pbot`
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:400,700,900")
+    link(rel="stylesheet", href="/static/styles/styles.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body(class=`theme-default`)
+    .content
+      block content
+
+    block scripts
+      script(src="/static/scripts/jquery.min.js")
+      script(src="/socket.io/socket.io.js")
+      script(src="/static/scripts/script.js")
