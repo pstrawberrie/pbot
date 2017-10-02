@@ -126,7 +126,7 @@
     },
     "drops": ["armor", "earth"]
   },
-  {
+{
     "name": "alien",
     "location": "dangerous_field",
     "stats": {
