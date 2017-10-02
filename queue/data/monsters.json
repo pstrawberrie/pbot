@@ -60,7 +60,7 @@
     "name": "ghoul1",
     "location": "graveyard",
     "stats": {
-      "hp": 25,
+      "hp": 36,
       "atk": 10,
       "def": 2
     },
@@ -70,8 +70,8 @@
     "name": "ghoul2",
     "location": "graveyard",
     "stats": {
-      "hp": 25,
-      "atk": 5,
+      "hp": 33,
+      "atk": 10,
       "def": 2
     },
     "drops": ["boots", "sword", "inspiration"]
@@ -84,7 +84,7 @@
       "def":5,
       "atk":12
     },
-    "drops": ["sword"]
+    "drops": ["boots", "sword", "inspiration"]
   },
   {
     "name": "fire_boss",
