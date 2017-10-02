@@ -18,13 +18,26 @@ exports.prettyLocation = (location) => {
 }
 
 // Get Stats String from Character obj
-exports.statsString = (characterObj) => {
-  const string = characterObj.hp + 'HP / ' +
-  characterObj.ap + 'AP / ' +
-  characterObj.mp + 'MP / ' +
-  characterObj.atk + 'ATK / ' +
-  characterObj.def + 'DEF';
-  return string;
+exports.statsString = (statsObj, variant) => {
+  if(!variant) {
+    const string = '' +
+    (statsObj.hp || 0) + 'HP / ' +
+    (statsObj.ap || 0) + 'AP / ' +
+    (statsObj.mp || 0) + 'MP / ' +
+    (statsObj.atk || 0) + 'ATK / ' +
+    (statsObj.def || 0) + 'DEF';
+    return string;
+  }
+  if(variant === 'item') {
+    const string = '+' +
+    (statsObj.hp || 0) + 'HP, +' +
+    (statsObj.ap || 0) + 'AP, +' +
+    (statsObj.mp || 0) + 'MP, +' +
+    (statsObj.atk || 0) + 'ATK, +' +
+    (statsObj.def || 0) + 'DEF';
+    return string;
+  }
+
 }
 
 // Calc Stats From Item
@@ -53,7 +66,6 @@ exports.calcStatsFromItems = (itemsObj, characterItems) => {
     statsObj.atk = (statsObj.atk || 0) + (itemsObj[item].atk || 0);
     statsObj.def = (statsObj.def || 0) + (itemsObj[item].def || 0);
   }
-  console.log(statsObj);
   return statsObj;
 }
 

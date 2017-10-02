@@ -15,6 +15,8 @@ const characterLook = require('./characterLook');
 const moveMonster = require('./moveMonster');
 const characterAttack = require('./characterAttack');
 const resCharacter = require('./reviveCharacter');
+const itemPickup = require('./itemPickup');
+const characterCast = require('./characterCast');
 
 module.exports = (data) => {
 
@@ -44,7 +46,7 @@ module.exports = (data) => {
       break;
 
     case "help":
-      help(arg1);
+      help(arg1, arg2);
       break;
 
     case "newcharacter":
@@ -87,6 +89,14 @@ module.exports = (data) => {
 
     case "attack":
       characterAttack(user, arg1, arg2);
+      break;
+
+    case "pickup":
+      itemPickup(user, arg1);
+      break;
+
+    case "cast":
+      characterCast(user, arg1, arg2);
       break;
 
     //+ Admin commands

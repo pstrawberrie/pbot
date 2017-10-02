@@ -8,9 +8,21 @@ const sendMessage = require('./sendMessage');
 const locations = require('../data/locations.json');
 const items = require('../data/items.json');
 
-// Has Been 1 minute
-const minutePassed = (lastUpdate) => {
-  return (moment(Date.now()).subtract(60, 'seconds') > moment(lastUpdate));
+// Move Cooldown
+const moveCooldown = (mod, lastUpdate) => {
+  let seconds = 12;
+  if(mod && mod >= 10) {
+    seconds = 9
+  }
+  if(mod && mod <10) {
+    seconds = util.negativeToOne(seconds - mod);
+  }
+  let diff = moment().diff(moment(lastUpdate), 'seconds') - (seconds);
+  let obj = {
+    canMove: moment(Date.now()).subtract(seconds, 'seconds') > moment(lastUpdate),
+    remaining: diff
+  }
+  return obj;
 }
 
 module.exports = (username, arg1) => {
@@ -53,19 +65,20 @@ module.exports = (username, arg1) => {
     }
     //success & update
     if(result.name === username && result.location != arg1) {
+      let cdCheck = moveCooldown(result.stats.ap, result.last_move);
       let update = {location: arg1}
       let lastLocation = result.location;
 
       if(!result.last_move) {
         update.last_move = Date.now();
       }
-      if(result.last_move && minutePassed(result.last_move)) {
+      if(result.last_move && cdCheck.canMove) {
         update.last_move = Date.now();
       }
-      if(result.last_move && !minutePassed(result.last_move)) {
+      if(result.last_move && !cdCheck.canMove) {
         sendMessage(
           'say', null,
-          `${username} - you can only move once per minute`
+          `${username} - your move is on cooldown (${-cdCheck.remaining}sec)`
         );
         return;
       }
@@ -104,18 +117,21 @@ module.exports = (username, arg1) => {
 
       // update character
       if(arg1 === 'sanctuary') {
-        console.log(`${username} went to sanctuary`);
         update.stats = util.calcStatsFromItems(items, result.items);
-        sendMessage(
-          'action', null, `The Sanctuary warms your soul, ${username}`
-        );
       }
       const updatedCharacter= Character.update({ name: username }, update,
       { new: true }).exec();
-      sendMessage(
-        'say', null,
-        `${username} moved to ${util.prettyLocation(arg1)}`
-      );
+      if(arg1 === 'sanctuary') {
+        sendMessage(
+          'action', null, `The Sanctuary warms your soul, ${username}`
+        );
+      } else {
+        sendMessage(
+          'say', null,
+          `${username} moved to ${util.prettyLocation(arg1)}`
+        );
+      }
+
     }
   });
 

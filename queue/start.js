@@ -23,7 +23,7 @@ require('./models/Location');
 
 // Populate a new DB?
 const populate = 0;
-if(populate === 1) {
+function firePopulate() {
   const locations = require('./data/locations.json');
   const Location = mongoose.model('Location');
   const monsters = require('./data/monsters.json');
@@ -134,11 +134,12 @@ if(populate === 1) {
 
   runPopulate();
 }
+if(populate === 1) firePopulate();
 
 // Run any tests?
 const tests = 0;
 if(tests === 1) {
-  console.log(chalk.magenta('+++ Tests +++'))
+  console.log(chalk.magenta('+++ Tests +++'));
 }
 
 const express = require('express');
@@ -147,15 +148,35 @@ const request = require('request');
 const messageEntry = require('./jobs/messageEntry');
 
 // Agenda Setup
-const agenda = new Agenda({db:{address:secret.dbString}}); //init agenda
-agenda.define('messageEntry', function(job, done) { //define agenda entry job
+const agenda = new Agenda({db:{address:secret.dbString}});
+ //+ define agenda entry job
+agenda.define('messageEntry', function(job, done) {
   messageEntry(job.attrs.data);
   done();
 });
-agenda.on('ready', function() { //start agenda on db connect
-  console.log(
-    chalk.cyan('+++ queue agenda is connected to mongodb +++')
-  );
+//+ define agenda world event jobs
+const healingWave = require('./jobs/world/healingWave');
+agenda.define('healingWave', function(job, done) {
+  healingWave();
+  done();
+});
+const announcePopulate = require('./jobs/world/announcePopulate');
+agenda.define('resetWorld', function(job, done) {
+  firePopulate();
+  announcePopulate();
+  done();
+});
+//+ agenda event listeners (start jobs here)
+agenda.on('ready', function() {
+  console.log(chalk.cyan('+++ queue agenda is connected to mongodb +++'));
+  agenda.cancel({}, (err, jobs) => {
+    console.log(chalk.red('xxx agenda jobs wiped (testing only) xxx'));
+  });
+  agenda.every('10 minutes', 'resetWorld');
+  setTimeout(() => {
+    return agenda.every('5 minutes', 'healingWave');
+  },5000)
+  //+ start queue
   agenda.start();
 });
 agenda.on('error', function(err) { //log any errors connecting to agenda db
@@ -165,6 +186,10 @@ agenda.on('error', function(err) { //log any errors connecting to agenda db
 agenda.on('fail', function(err, job) { //log failed agenda jobs
   console.log('Agenda job "' + job.attrs.name + '" failed!');
   console.log('Error String: ' + err);
+});
+agenda.on('complete', function(job) { //clear completed message entries
+  if(job.attrs.name === 'messageEntry')
+  job.remove();
 });
 function graceful() {
   agenda.stop(function() { process.exit(0); });

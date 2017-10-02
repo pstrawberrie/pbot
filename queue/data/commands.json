@@ -7,7 +7,9 @@
   "where" : "shows your character's location",
   "locations" : "shows all available locations",
   "move" : "moves your character to a new location (!move town_square)",
-  "look" : "shows information about your current location",
+  "look" : "shows current location information",
   "items" : "shows your character's items",
-  "skills" : "shows your character's skills"
+  "skills" : "shows your character's skills. Use !help skill [skill] to learn about a skill.",
+  "attack" : "attack a monster or character (!attack [character] or !attack monster [monster])",
+  "pickup" : "pick up an item (only 1 of each item allowed)"
 }

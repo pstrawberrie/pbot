@@ -6,6 +6,8 @@ html
     link(rel='stylesheet', href='/styles/bundle.min.css')
     link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    script(src="/socket.io/socket.io.js")
+    script(src="/scripts/bundle.min.js")
   body.theme-default
     block navigation
       include ../partials/navigation
@@ -23,4 +25,4 @@ html
       block content
 
     block scripts
-      script(src="/scripts/bundle.min.js")
+      

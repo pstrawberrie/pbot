@@ -11,7 +11,7 @@ const makeAttack = require('./makeAttack');
 // Attack cooldown (30sec - mod)
 // - working off of updated_at (move, attack)
 const attackAllowed = (mod, lastUpdate) => {
-  let seconds = 30;
+  let seconds = 15;
   if(mod) {
     if(mod >= 23) {
       seconds = 7;
@@ -21,7 +21,6 @@ const attackAllowed = (mod, lastUpdate) => {
     }
   }
   let latestAttack = moment(lastUpdate);
-  let latestAttackCompare = moment(lastUpdate).format('ss');
   let attackBool = moment().subtract(seconds, 'seconds') > latestAttack;
   let cooldownObj = {
     canAttack: attackBool,

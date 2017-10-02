@@ -36,7 +36,7 @@ const characterSchema = new mongoose.Schema({
   },
   skills: {
     type: Array,
-    default: ['attack', 'heal']
+    default: ['heal']
   },
   items: {
     type: Array
@@ -52,6 +52,8 @@ const characterSchema = new mongoose.Schema({
   last_move: Date,
   last_attack: Date,
   last_target: String,
+  totalMonsterKills: Number,
+  totalCharacterKills: Number,
   totalDeaths: Number,
   totalTimesRevived: Number,
   created_at: Date,

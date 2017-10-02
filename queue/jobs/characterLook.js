@@ -23,13 +23,12 @@ module.exports = (username) => {
       .then((result) => {
         if(result[0].characters.length > 0) {characters.splice(0,1);characters.push(...result[0].characters)}
         if(result[0].items.length > 0) {items.splice(0,1);items.push(...result[0].items)}
-        if(result[0].powerups.length > 0) {powerups.splice(0,1);powerups.push(...result[0].powerups)}
         if(result[0].monsters.length > 0) {monsters.splice(0,1);monsters.push(...result[0].monsters)}
 
         sendMessage(
           'say', null,
           `${util.prettyLocation(currentLocation)} // **Items** ${util.arrCommaJoin(items)}
-           // **Powerups** ${util.arrCommaJoin(powerups)} // **Characters** ${util.arrCommaJoin(characters)}
+           // **Characters** ${util.arrCommaJoin(characters)}
           // **Monsters** ${util.arrCommaJoin(monsters)}
           `
         );

@@ -41,7 +41,7 @@ module.exports = (username, arg1) => {
       }).catch(err => {console.log(`err rezing ${user}\n${err}`)});
       sendMessage(
         'action', null,
-        `${user} lives again!`
+        `${user} comes back to life! (${result.location})`
       );
 
     }

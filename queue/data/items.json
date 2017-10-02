@@ -1,23 +1,84 @@
 {
-  "basic_clothes": {
-    "hp":1,
-    "def":1
+  "soul": {
+    "hp":10,
+    "ap":2,
+    "mp":2,
+    "atk":3,
+    "def":2
   },
-  "robe": {
+  "inspiration": {
     "hp":5,
-    "def":5,
-    "mp":5
+    "ap":1,
+    "mp":1,
+    "atk":2,
+    "def":2
+  },
+  "cunning": {
+    "hp":20,
+    "ap":5,
+    "mp":5,
+    "atk":10,
+    "def":5
+  },
+  "hero": {
+    "hp":50,
+    "atk":10,
+    "ap":5,
+    "def":10
+  },
+  "sage": {
+    "hp":50,
+    "mp":20,
+    "atk":10,
+    "def":10
+  },
+  "armor": {
+    "hp":18,
+    "def":8
+  },
+  "sword": {
+    "hp":10,
+    "atk":5,
+    "def":1
   },
   "boots": {
-    "hp":1,
-    "ap":5,
-    "def":1
+    "hp":5,
+    "ap":3,
+    "def":3,
+    "atk":1
   },
   "hype_cape": {
-    "hp":5,
+    "hp":10,
     "ap":5,
     "mp":5,
     "atk":5,
     "def":5
+  },
+  "hype_ring": {
+    "hp":10,
+    "ap":5,
+    "mp":5,
+    "def":5
+  },
+  "halo": {
+    "hp":20,
+    "mp":10,
+    "atk":5,
+    "def":5
+  },
+  "earth": {
+    "hp":20,
+    "def":10
+  },
+  "fire": {
+    "atk":20
+  },
+  "ice": {
+    "mp":10,
+    "atk":10
+  },
+  "wind": {
+    "ap":10,
+    "atk":10
   }
 }

@@ -19,10 +19,6 @@ const locationSchema = new mongoose.Schema({
     type: Array,
     default: []
   },
-  powerups: {
-    type: Array,
-    default: []
-  },
   updated_at: Date
 });
 

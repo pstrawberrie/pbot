@@ -1,0 +1,4 @@
+{
+  "heal": "!cast heal or !cast heal [character] - heal yourself or another character",
+  "revive": "!cast revive [character] - revive a player"
+}

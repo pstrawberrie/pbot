@@ -1,12 +1,10 @@
 /* App Scripts - controlled import */
-//import h from './lib/helpers.js';
-//import $ from 'cash-dom';
-//import access from './ui/access';
-
-// Test local helpers lib
-//h.test();
-
-// Test cash-dom
-// $(document).on('click', function() {
-//   console.log('zz')
-// })
+const socket = io.connect('http://localhost:3002');
+socket.on('news', function (data) {
+  console.log(data);
+  socket.emit('my other event', { my: 'data' });
+});
+socket.on('character', function (data) {
+  console.log(data);
+  socket.emit('character', { whats: 'up' });
+});
