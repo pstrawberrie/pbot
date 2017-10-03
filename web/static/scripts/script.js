@@ -10,25 +10,13 @@ $(document).ready(function() {
     e.preventDefault();
   });
 
-  $('#goBlack').on('click', function() {
-    socket.emit('goBlack', 'clicked');
+  // Get Test Info from socket
+  socket.on('test', function(info) {
+    console.log(info);
+    $('#test').html(`
+      ${info.name}<br>
+      ${info.message}
+    `);
   });
-  $('#goWhite').on('click', function() {
-    socket.emit('goWhite', 'clicked');
-  });
-
-  // Push new messages (from everybody) to the chatbox
-  socket.on('chat message', function(msg) {
-    console.log(msg)
-    $('#messages').append($('<li>').text(msg));
-  });
-
-  socket.on('goBlack', function() {
-    $('body').css('background', '#000');
-  })
-
-  socket.on('goWhite', function() {
-    $('body').css('background', '#fff');
-  })
 
 })

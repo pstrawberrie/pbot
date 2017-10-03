@@ -1,3 +1,6 @@
+require('./models/Character');
+require('./models/Location');
+require('./models/Monster');
 const express = require('express');
 const router = express.Router();
 

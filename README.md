@@ -28,13 +28,14 @@ cd ../web && yarn install (not working yet, skip this for now)
 - Sanctuary (healz u, m8)
 - Dying & Death restrictions (no move/attack)
 - Rez (admin only)
-
-## Needs to be implemented
 - Heal
 - Attack characters
 - monster drop + item pickup
 - monster rez cron
 - player rez cron ("A Healing Wind sweeps over the land")
+
+## Needs to be implemented
+- monsters level up with time
 
 ## Ideas
 - jack - "points for commands"

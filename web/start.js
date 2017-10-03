@@ -7,6 +7,20 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const routes = require('./routes');
+const secret = require('../_config/secret');
+const mongoose = require('mongoose');
+
+// DB Connect
+mongoose.connect(secret.dbString, {useMongoClient: true});
+mongoose.Promise = global.Promise;
+mongoose.connection.once('open', () => {
+  console.log(
+    chalk.cyan('+++ web is connected to mongodb +++')
+  )
+});
+mongoose.connection.on('error', (err) => {
+  console.error(`Mongo connection Error:\n ${err.message}`);
+});
 
 // Middlewares
 app.set('views', path.join(__dirname, 'views'));
@@ -20,8 +34,18 @@ app.use(lessMiddleware(__dirname + '', [{
 app.use('/static', express.static('static'));
 app.use(bodyParser.json());
 
+//Socket Passthrough Function
+function passSocketEvent(eventName, eventJson) {
+  io.emit(eventName, eventJson);
+}
+
 // Routes
 app.use('/', routes);
+app.post('/socket', (req, res) => {
+  console.log(req.body);
+  passSocketEvent(req.body.eventName, req.body.info);
+  res.end();
+});
 
 // Set up Socket Listener Events
 io.on('connection', function(socket){
@@ -33,9 +57,8 @@ io.on('connection', function(socket){
   });
 
   //+ example..
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    console.log('message: ' + msg);
+  socket.on('test', function(info){
+    console.log(`test socket caem in: ${info}`)
   });
 
   //+ Attack
@@ -50,9 +73,6 @@ io.on('connection', function(socket){
   socket.on('die', function(character){
     io.emit('die', character);
   });
-
-  //+ Disconnect
-
 
 });
 

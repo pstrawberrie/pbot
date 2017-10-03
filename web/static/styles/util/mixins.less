@@ -1,0 +1,196 @@
+/* Mixins */
+
+.border-radius(@border-radius) {
+	-webkit-border-radius: @border-radius;
+	-moz-border-radius: @border-radius;
+	border-radius: @border-radius;
+}
+.border-bottom-radius(@border-bottom-radius) {
+	-webkit-border-bottom-left-radius: @border-bottom-radius;
+	-moz-border-bottom-left-radius: @border-bottom-radius;
+	border-bottom-left-radius: @border-bottom-radius;
+	-webkit-border-bottom-right-radius: @border-bottom-radius;
+	-moz-border-bottom-right-radius: @border-bottom-radius;
+	border-bottom-right-radius: @border-bottom-radius;
+}
+.border-top-radius(@border-top-radius) {
+	-webkit-border-top-left-radius: @border-top-radius;
+	-moz-border-top-left-radius: @border-top-radius;
+	border-top-left-radius: @border-top-radius;
+	-webkit-border-top-right-radius: @border-top-radius;
+	-moz-border-top-right-radius: @border-top-radius;
+	border-top-right-radius: @border-top-radius;
+}
+.border-bottom-left-radius(@border-bottom-left-radius) {
+	-webkit-border-bottom-left-radius: @border-bottom-left-radius;
+	-moz-border-bottom-left-radius: @border-bottom-left-radius;
+	border-bottom-left-radius: @border-bottom-left-radius;
+}
+.border-bottom-right-radius(@border-bottom-right-radius) {
+	-webkit-border-bottom-right-radius: @border-bottom-right-radius;
+	-moz-border-bottom-right-radius: @border-bottom-right-radius;
+	border-bottom-right-radius: @border-bottom-right-radius;
+}
+.border-top-left-radius(@border-top-left-radius) {
+	-webkit-border-top-left-radius: @border-top-left-radius;
+	-moz-border-top-left-radius: @border-top-left-radius;
+	border-top-left-radius: @border-top-left-radius;
+}
+.border-top-right-radius(@border-top-right-radius) {
+	-webkit-border-top-right-radius: @border-top-right-radius;
+	-moz-border-top-right-radius: @border-top-right-radius;
+	border-top-right-radius: @border-top-right-radius;
+}
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	-moz-animation: @arguments;
+    -ms-animation: @arguments;
+     -o-animation: @arguments;
+	animation: @arguments;
+}
+.keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+    @-o-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+.transition(@transition) {
+	-webkit-transition:@transition;
+	-moz-transition:@transition;
+	-o-transition:@transition;
+	transition:@transition;
+}
+.transform(@transform) {
+  -ms-transform:@transform;
+  -webkit-transform:@transform;
+  transform:@transform;
+}
+.transition-transform(@transition) {
+    -webkit-transition: -webkit-transform @transition;
+    -moz-transition: -moz-transform @transition;
+    -o-transition: -o-transform @transition;
+    transition: transform @transition;
+}
+.box-shadow (@box-shadow) {
+	-webkit-box-shadow: @box-shadow;
+	-moz-box-shadow: @box-shadow;
+	box-shadow: @box-shadow;
+}
+.box-shadows (@box-shadows,@box-shadowss) {
+	-webkit-box-shadow: @box-shadows,@box-shadowss;
+	-moz-box-shadow: @box-shadows,@box-shadowss;
+	box-shadow: @box-shadows,@box-shadowss;
+}
+.background-size (@background-size) {
+	-webkit-background-size: @background-size;
+	-moz-background-size: @background-size;
+	-o-background-size: @background-size;
+	background-size: @background-size;
+}
+.opacity (@opacity: 0.5) {
+	-webkit-opacity: @opacity;
+	-moz-opacity: @opacity;
+	opacity: @opacity;
+}
+.box-sizing (@box-sizing) {
+  -webkit-box-sizing: @box-sizing;
+  -moz-box-sizing: @box-sizing;
+  box-sizing: @box-sizing;
+}
+.gradient (@startColor: #000, @endColor: white) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+.horizontal-gradient (@startColor: #000, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+
+// flexbox mixins - thx jayj!
+// https://gist.github.com/jayj/4012969
+.flex-display(@display: flex) {
+	display: ~"-webkit-@{display}";
+	display: ~"-ms-@{display}box";
+	display: ~"-ms-@{display}";
+	display: @display;
+}
+
+.flex(@columns: initial) {
+  -webkit-flex: @columns;
+      -ms-flex: @columns;
+          flex: @columns;
+}
+
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+.flex-wrap(@wrap: nowrap) {
+  -webkit-flex-wrap: @wrap;
+      -ms-flex-wrap: @wrap;
+          flex-wrap: @wrap;
+}
+
+.flex-flow(@flow) {
+  -webkit-flex-flow: @flow;
+      -ms-flex-flow: @flow;
+          flex-flow: @flow;
+}
+
+.flex-order(@order: 0) {
+  -webkit-order: @order;
+      -ms-order: @order;
+          order: @order;
+}
+
+.flex-grow(@grow: 0) {
+  -webkit-flex-grow: @grow;
+      -ms-flex-grow: @grow;
+          flex-grow: @grow;
+}
+
+.flex-shrink(@shrink: 1) {
+  -webkit-flex-shrink: @shrink;
+      -ms-flex-shrink: @shrink;
+          flex-shrink: @shrink;
+}
+
+.flex-basis(@width: auto) {
+  -webkit-flex-basis: @width;
+      -ms-flex-basis: @width;
+          flex-basis: @width;
+}
+
+.justify-content(@justify: flex-start) {
+  -webkit-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+.align-content(@align: stretch) {
+  -webkit-align-content: @align;
+      -ms-align-content: @align;
+          align-content: @align;
+}
+
+.align-items(@align: stretch) {
+  -webkit-align-items: @align;
+      -ms-align-items: @align;
+          align-items: @align;
+}
+
+.align-self(@align: auto) {
+  -webkit-align-self: @align;
+      -ms-align-self: @align;
+          align-self: @align;
+}

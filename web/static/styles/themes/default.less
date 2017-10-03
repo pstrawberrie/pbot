@@ -1,0 +1,33 @@
+/* Default Theme */
+
+// Color Variables
+@white: #fff;
+@dark: #222;
+@dark-lighter: #363636;
+
+@gray: #ddd;
+
+@primary: #3cbae8;
+
+// Color Utility: Backgrounds
+.bg-white { background:@white;color:@dark; }
+.bg-dark { background:@dark;color:@white; }
+.bg-gray { background:@gray;color:@dark; }
+
+// Color Utility: Text
+.text-white { color:@white; }
+.text-black { color:@dark; }
+
+// Theme Master
+body.theme-default {
+  .bg-dark;
+
+  // Navigation Component
+  nav {background:@dark-lighter;}
+  nav a { color:@white; }
+  nav a:hover { border-color:@primary; }
+
+  // Card Component
+  .card__footer.has-border { border-color: @gray; }
+
+}
