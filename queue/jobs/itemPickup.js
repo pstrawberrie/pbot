@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Character = mongoose.model('Character');
 const Location = mongoose.model('Location');
 const sendMessage = require('./sendMessage');
+const sendCharacterSocket = require('./sendCharacterSocket');
 
 module.exports = (username, itemToPickup) => {
   if(!username) return;
@@ -45,9 +46,10 @@ module.exports = (username, itemToPickup) => {
 
             Location.update({name:characterLocation}, {items:newLocationItems})
             .then(locationUpdateResult => {
-              Character.update({name:username}, {items:newCharacterItems})
+              Character.findOneAndUpdate({name:username}, {items:newCharacterItems}, {new:true})
               .then(characterUpdateResult => {
                 sendMessage('action', null, `${username} picked up ${itemToPickup}. Visit the sanctuary to equip items.`);
+                sendCharacterSocket('characterItemPickup', {character:characterUpdateResult});
               }).catch(err => {`Err updating new items array for character ${username}\n${err}`})
             }).catch(err => {`Err updating new items array for location ${location}\n${err}`})
           }

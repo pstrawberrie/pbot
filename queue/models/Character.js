@@ -52,10 +52,22 @@ const characterSchema = new mongoose.Schema({
   last_move: Date,
   last_attack: Date,
   last_target: String,
-  totalMonsterKills: Number,
-  totalCharacterKills: Number,
-  totalDeaths: Number,
-  totalTimesRevived: Number,
+  totalMonsterKills: {
+    type: Number,
+    default:0
+  },
+  totalCharacterKills: {
+    type: Number,
+    default:0
+  },
+  totalDeaths: {
+    type: Number,
+    default:0
+  },
+  totalTimesRevived: {
+    type: Number,
+    default:0
+  },
   created_at: Date,
   updated_at: Date
 });

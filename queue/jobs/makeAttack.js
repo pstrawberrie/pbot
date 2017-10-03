@@ -7,6 +7,7 @@ const Location = mongoose.model('Location');
 const sendMessage = require('./sendMessage');
 const moveMonster = require('./moveMonster');
 const itemDrop = require('./itemDrop');
+const sendCharacterSocket = require('./sendCharacterSocket');
 
 const calcBaseDamage = (variant, attackerStats, defenderStats, attackerMods, defenderMods) => {
   if(variant === 'classic') {
@@ -59,29 +60,31 @@ module.exports = (directive, attacker, defender) => {
     }
 
     //do db updates for damage
-    Character.update({name:attacker.name}, characterUpdate)
-    .then(result => {
+    Character.findOneAndUpdate({name:attacker.name}, characterUpdate, {new:true})
+    .then(characterResult => {
       console.log ('updated Character hp to ' + newCharacterHp);
-    }).catch(err => {console.log(`Err updating character vs monster\n ${err}`)})
-    Monster.update({name:defender.name}, monsterUpdate)
-    .then(result => {
-      console.log ('updated Monster hp to ' + newMonsterHp)
-      //give messages
-      sendMessage('action', null,
-        `${attacker.name} ${attackString} ${defender.name} for ${baseDmgToMonster} damage (${newMonsterHp}hp remaining). ${attacker.name} took ${baseDmgToCharacter}${monsterCritString} damage (${newCharacterHp}hp remaining).`
-      )
-      if(characterDead === 1) {
-        sendMessage('action', null, `RIP ** ${attacker.name} was killed by ${defender.name}! ** BibleThump`)
-      }
-      if(monsterDead === 1) {
-        sendMessage('action', null, `** ${defender.name} was killed by ${attacker.name}! ** Squid4`);
-        if(Math.random() > .65) itemDrop(defender.drops, defender.location);
-        moveMonster(defender.name, 'death_pit');
-      }
-    }).catch(err => {console.log(`Err updating character vs monster\n ${err}`)})
-
-    console.log(`${attacker.name} damage to ${defender.name}: ${baseDmgToMonster}`);
-    console.log(`${defender.name} damage to ${attacker.name}: ${baseDmgToCharacter}`);
+      Monster.findOneAndUpdate({name:defender.name}, monsterUpdate, {new:true})
+      .then(monsterResult => {
+        console.log ('updated Monster hp to ' + newMonsterHp)
+        //give messages
+        sendMessage('action', null,
+          `${attacker.name} ${attackString} ${defender.name} for ${baseDmgToMonster} damage (${newMonsterHp}hp remaining). ${attacker.name} took ${baseDmgToCharacter}${monsterCritString} damage (${newCharacterHp}hp remaining).`
+        )
+        if(characterDead === 1) {
+          sendMessage('action', null, `RIP ** ${attacker.name} was killed by ${defender.name}! ** BibleThump`)
+          sendCharacterSocket('characterDied', {character:characterResult});
+        }
+        if(monsterDead === 1) {
+          sendMessage('action', null, `** ${defender.name} was killed by ${attacker.name}! ** Squid4`);
+          if(Math.random() > .65) itemDrop(defender.drops, defender.location);
+          moveMonster(defender.name, 'death_pit');
+        }
+        // done + socket
+        console.log(`${attacker.name} damage to ${defender.name}: ${baseDmgToMonster}`);
+        console.log(`${defender.name} damage to ${attacker.name}: ${baseDmgToCharacter}`);
+        sendCharacterSocket('characterVsMonster', {character:characterResult,monster:monsterResult});
+      }).catch(err => {console.log(`Err updating monster\n ${err}`)})
+    }).catch(err => {console.log(`Err updating character\n ${err}`)})
   }
 
   //+ CHARACTER VS CHARACTER
@@ -109,8 +112,8 @@ module.exports = (directive, attacker, defender) => {
     }
 
     //do db updates for damage
-    Character.update({name:defender.name}, enemyUpdate)
-    .then(result => {
+    Character.findOneAndUpdate({name:defender.name}, enemyUpdate, {new:true})
+    .then(enemyUpdate => {
       console.log (`updated ${defender.name}'s hp to ${newEnemyHp}`)
       //give messages
       sendMessage('action', null,
@@ -122,8 +125,11 @@ module.exports = (directive, attacker, defender) => {
         Character.update({name:attacker.name}, characterUpdate)
         .then(characterUpdateResult => {
           console.log(`updated ${attacker.name} after killing ${defender.name}`)
+          sendCharacterSocket('characterDied', {character:enemyUpdate});
+          sendCharacterSocket('characterDeathAward', {character:characterUpdateResult});
         }).catch(err => {console.log(`err saving attacker info on kill for ${attacker.name}`)})
       }
+      sendCharacterSocket('characterVsCharacter', {character:attacker,enemy:enemyUpdate});
     }).catch(err => {console.log(`Err updating character vs character\n ${err}`)})
 
     console.log(`${attacker.name} damage to ${defender.name}: ${baseDmgToEnemy}`);

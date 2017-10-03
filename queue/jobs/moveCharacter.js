@@ -7,6 +7,7 @@ const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 const locations = require('../data/locations.json');
 const items = require('../data/items.json');
+const sendCharacterSocket = require('./sendCharacterSocket');
 
 // Move Cooldown
 const moveCooldown = (mod, lastUpdate) => {
@@ -86,6 +87,7 @@ module.exports = (username, arg1) => {
       // update 'from' location
       Location.find({name:lastLocation})
       .then((result) => {
+        if(!result[0]) return;
         let charactersArr = result[0].characters;
         if(charactersArr.length > -1 && charactersArr.includes(username)) {
           let characterIndex = charactersArr.indexOf(username);
@@ -119,18 +121,17 @@ module.exports = (username, arg1) => {
       if(arg1 === 'sanctuary') {
         update.stats = util.calcStatsFromItems(items, result.items);
       }
-      const updatedCharacter= Character.update({ name: username }, update,
-      { new: true }).exec();
-      if(arg1 === 'sanctuary') {
-        sendMessage(
-          'action', null, `The Sanctuary warms your soul, ${username}`
-        );
-      } else {
-        sendMessage(
-          'say', null,
-          `${username} moved to ${util.prettyLocation(arg1)}`
-        );
-      }
+      Character.findOneAndUpdate({ name: username }, update, { new: true })
+      .then(result => {
+        if(result != null) {
+          if(arg1 === 'sanctuary') {
+            sendMessage('action', null, `The Sanctuary warms your soul, ${username}`);
+          } else {
+            sendMessage('say', null,`${username} moved to ${util.prettyLocation(arg1)}`);
+          }
+          sendCharacterSocket('moveCharacter', {character:result});
+        }
+      }).catch(err => {`err updating character on move\m${err}`})
 
     }
   });

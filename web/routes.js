@@ -8,4 +8,7 @@ const router = express.Router();
 const obsController = require('./controllers/obsController');
 router.get('/obs', obsController.default);
 
+// Status Check
+router.post('/status', obsController.statusCheck);
+
 module.exports = router;

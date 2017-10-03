@@ -5,6 +5,7 @@ const Monster = mongoose.model('Monster');
 const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 const items = require('../data/items');
+const sendCharacterSocket = require('./sendCharacterSocket');
 
 module.exports = (username, arg1) => {
 
@@ -35,9 +36,10 @@ module.exports = (username, arg1) => {
         stats
       }
 
-      Character.update({name:user}, updateCharacter)
+      Character.findOneAndUpdate({name:user}, updateCharacter, {new:true})
       .then(result => {
         console.log(`Rezd ${user}`)
+        sendCharacterSocket('characterRevived', {character:result});
       }).catch(err => {console.log(`err rezing ${user}\n${err}`)});
       sendMessage(
         'action', null,

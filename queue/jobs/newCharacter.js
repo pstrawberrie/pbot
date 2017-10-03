@@ -5,6 +5,7 @@ const getCharacter = require('./getCharacter');
 const sendMessage = require('./sendMessage');
 const characterItem = require('./characterItem');
 const moveCharacter = require('./moveCharacter');
+const sendCharacterSocket = require('./sendCharacterSocket');
 
 module.exports = (username) => {
 
@@ -33,6 +34,8 @@ module.exports = (username) => {
           null,
           `A new player joined! Welcome to the battle, ${username}!!!`
         );
+        console.log(result)
+        sendCharacterSocket('newCharacter', {character:result});
       })
       .catch((error) => {
         console.log('Error making new character!\n' + error);

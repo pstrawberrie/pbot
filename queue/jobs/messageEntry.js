@@ -17,7 +17,6 @@ const characterAttack = require('./characterAttack');
 const resCharacter = require('./reviveCharacter');
 const itemPickup = require('./itemPickup');
 const characterCast = require('./characterCast');
-const testSocket = require('./fun/testSocket');
 
 module.exports = (data) => {
 
@@ -126,9 +125,6 @@ module.exports = (data) => {
       break;
 
     //+ Test commands
-    case "socket":
-      testSocket(user, arg1);
-      break;
 
     default:
       console.log('the command "' + command + '" is not registered with the bot')

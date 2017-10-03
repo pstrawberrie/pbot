@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Character = mongoose.model('Character');
 const sendMessage = require('../sendMessage');
 const items = require('../../data/items.json');
+const sendCharacterSocket = require('../sendCharacterSocket');
 
 module.exports = (caster, castTarget) => {
 
@@ -47,9 +48,10 @@ module.exports = (caster, castTarget) => {
       }
     }
 
-    Character.update({name:caster.name},casterUpdate)
+    Character.findOneAndUpdate({name:caster.name},casterUpdate,{new:true})
     .then(casterUpdateResult => {
       sendMessage('action',null,`${caster.name}${critString} healed for ${calculated.amount}HP (${casterNewHp}/${casterMaxHp}HP)`)
+      sendCharacterSocket('characterSelfHeal', {character:casterUpdateResult});
     }).catch(err => {console.log(`err updating caster after heal\n${err}`)})
 
   } else {
@@ -94,11 +96,12 @@ module.exports = (caster, castTarget) => {
       }
     }
 
-    Character.update({name:caster.name},casterUpdate)
+    Character.findOneAndUpdate({name:caster.name},casterUpdate,{new:true})
     .then(casterUpdateResult => {
-      Character.update({name:castTarget.name},castTargetUpdate)
+      Character.findOneAndUpdate({name:castTarget.name},castTargetUpdate,{new:true})
       .then(castTargetUpdateResult => {
         sendMessage('action',null,`${caster.name}${critString} healed ${castTarget.name} for ${calculated.amount}HP (${castTargetNewHp}/${castTargetMaxHp}HP)`)
+        sendCharacterSocket('characterTargetHeal', {character:casterUpdateResult,target:castTargetUpdateResult});
       }).catch(err => {console.log(`err updating cast target after heal\n${err}`)})
     }).catch(err => {console.log(`err updating caster after targeted heal\n${err}`)})
 

@@ -36,14 +36,13 @@ app.use(bodyParser.json());
 
 //Socket Passthrough Function
 function passSocketEvent(eventName, eventJson) {
-  io.emit(eventName, eventJson);
+  io.emit('passed', eventName, eventJson);
 }
 
 // Routes
 app.use('/', routes);
 app.post('/socket', (req, res) => {
-  console.log(req.body);
-  passSocketEvent(req.body.eventName, req.body.info);
+  passSocketEvent(req.body);
   res.end();
 });
 
