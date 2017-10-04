@@ -9,8 +9,9 @@
 
 @blue: #115151;
 
-@hp: #5ab738;
-@hp-danger: #94a035;
+@hp: #3e8724;
+@hp-yellow: #94a035;
+@hp-red: #9b252b;
 
 // Color Utility: Backgrounds
 .bg-white { background:@white;color:@dark; }
@@ -27,13 +28,17 @@ body.theme-default {
 
   // OBS Health Bar
   .characterHealthBar {
-    background:@hp;
-    &.hp-danger {background:@hp-danger;}
+    background:#000;
+    .healthColor {
+      background:@hp;
+      &.hp-yellow {background:@hp-yellow;}
+      &.hp-red {background:@hp-red;}
+    }
   }
 
   // OBS Stats
   .characterStats {
-    
+
   }
 
 }

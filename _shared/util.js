@@ -69,6 +69,24 @@ exports.calcStatsFromItems = (itemsObj, characterItems) => {
   return statsObj;
 }
 
+exports.getHealthPercent = (items, character) => {
+  const maxHp = exports.calcStatsFromItems(items, character.items).hp;
+  const currentHp = character.stats.hp;
+  const currentPercentage = Math.floor((currentHp / maxHp)*100);
+  return currentPercentage;
+}
+
+exports.getHealthColorClass = (items, character) => {
+  const currentPercentage = exports.getHealthPercent(items,character);
+  if(currentPercentage <= 25) {
+    return 'hp-red';
+  } else if(currentPercentage < 51) {
+    return 'hp-yellow';
+  } else {
+    return '';
+  }
+}
+
 // Turn negative number to 0
 exports.negativeToZero = number => {
   if(number < 0) {

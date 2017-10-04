@@ -16,6 +16,6 @@
     "socket.io": "^2.0.3"
   },
   "scripts": {
-    "start": "nodemon -e js --ignore /client ./start.js --colors"
+    "start": "nodemon -e js,pug --ignore /client ./start.js --colors"
   }
 }

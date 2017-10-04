@@ -3,6 +3,7 @@ const util = require('../_shared/util');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 const Agenda = require('agenda');
+const cors = require('cors');
 
 // DB Connect
 mongoose.connect(secret.dbString, {useMongoClient: true});
@@ -210,6 +211,17 @@ app.post('/queue', function (req, res) {
     res.end();
   }
 });
+
+// Routes for front-end to grab latest data
+const items = require('./data/items.json');
+const skills = require('./data/skills.json');
+const locations = require('./data/locations.json');
+const monsters = require('./data/monsters.json');
+app.get('/items',cors(),(req, res) => {res.json(items)})
+app.get('/skills',cors(),(req, res) => {res.json(skills)})
+app.get('/locations',cors(),(req, res) => { res.json(locations) })
+app.get('/monsters',cors(),(req, res) => { res.json(monsters) })
+
 app.listen(3000, function () {
   console.log(
     chalk.cyan('+++ queue listening (http://localhost:3000) +++')

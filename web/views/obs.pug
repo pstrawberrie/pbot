@@ -4,40 +4,43 @@ block content
   #obs
     .characterBox
       .characterHealthBar
-        .healthColor(data-health-slider=character.stats.hp)
-        .health
+        .healthColor.animated(style=`width:${util.getHealthPercent(items,character)}%` class=util.getHealthColorClass(items,character))
+        .healthText
           span.healthCurrent(data-text-hp=character.stats.hp)= character.stats.hp
+          span &nbsp;/&nbsp;
+          span.healthMax(data-text-hp-max=util.calcStatsFromItems(items, character.items).hp)
+            | #{util.calcStatsFromItems(items, character.items).hp}
       .characterStats
-        .stat.characterHp
+        .stat.characterHp.animated(data-animate="stats")
           span.ra.ra-health
-          span(data-text-hp=character.stats.hp)= character.stats.hp
-        .stat.characterAp
+          span.stat(data-text-hp=character.stats.hp)= character.stats.hp
+        .stat.characterAp.animated(data-animate="stats")
           span.ra.ra-hand
-          span(data-text-ap=character.stats.ap)= character.stats.ap
-        .stat.characterMp
+          span.stat(data-text-ap=character.stats.ap)= character.stats.ap
+        .stat.characterMp.animated(data-animate="stats")
           span.ra.ra-fairy-wand
-          span(data-text-mp=character.stats.mp)= character.stats.mp
-        .stat.characterAtk
+          span.stat(data-text-mp=character.stats.mp)= character.stats.mp
+        .stat.characterAtk.animated(data-animate="stats")
           span.ra.ra-sword
-          span(data-text-atk=character.stats.atk)= character.stats.atk
-        .stat.characterDef
+          span.stat(data-text-atk=character.stats.atk)= character.stats.atk
+        .stat.characterDef.animated(data-animate="stats")
           span.ra.ra-round-shield
-          span(data-text-def=character.stats.def)= character.stats.def
+          span.stat(data-text-def=character.stats.def)= character.stats.def
     .characterBox
       .characterLocation
-        span(data-character-location=character.location)= util.prettyLocation(character.location)
+        span.animated(data-character-location=character.location)= util.prettyLocation(character.location)
       .section
         .characterDeaths
-          span.ra.ra-skull
+          span.ra.ra-skull.animated
           span(data-text-deaths=character.totalDeaths)= character.totalDeaths
         .characterKills
-          span.ra.ra-crossed-swords
+          span.ra.ra-crossed-swords.animated
           span(data-text-character-kills=character.totalCharacterKills)= character.totalCharacterKills
       .section
         .monsterKills
-          span.ra.ra-monster-skull
+          span.ra.ra-monster-skull.animated
           span(data-text-monster-kills=character.totalMonsterKills)= character.totalMonsterKills
         .characterRevives
-          span.ra.ra-angel-wings
+          span.ra.ra-angel-wings.animated
           span(data-text-revives=character.totalTimesRevived)= character.totalTimesRevived
       

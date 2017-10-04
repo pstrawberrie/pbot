@@ -10,28 +10,29 @@ const characterSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'death_pit'
   },
   stats: {
     hp: {
       type: Number,
-      default: 10
+      default: 0
     },
     ap: {
       type: Number,
-      default: 3
+      default: 0
     },
     mp: {
       type: Number,
-      default: 3
+      default: 0
     },
     def: {
       type: Number,
-      default: 1
+      default: 0
     },
     atk: {
       type: Number,
-      default: 2
+      default: 0
     }
   },
   skills: {
