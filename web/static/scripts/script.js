@@ -56,10 +56,10 @@ $(document).ready(function() {
   //..we can actually just pass these in from the pug render somehow...
   //...but this works for now...
   let items, monsters, skills, locations;
-  $.get("//localhost:4000/items",function(data){items = data;});
-  $.get("//localhost:4000/monsters",function(data){monsters = data;});
-  $.get("//localhost:4000/skills",function(data){skills = data;});
-  $.get("//localhost:4000/locations",function(data){locations = data;});
+  $.get("/items",function(data){items = data;});
+  $.get("/monsters",function(data){monsters = data;});
+  $.get("/skills",function(data){skills = data;});
+  $.get("/locations",function(data){locations = data;});
 
   //@FUNCTION: Update Character Text Stats
   function updateCharacterTextStats(character) {

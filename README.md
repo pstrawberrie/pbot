@@ -33,9 +33,14 @@ cd ../web && yarn install (not working yet, skip this for now)
 - monster drop + item pickup
 - monster rez cron
 - player rez cron ("A Healing Wind sweeps over the land")
+- update for heal to be "!heal" shortcut
+
+## Bugs
+- !newcharacter spawns with 0 stats, and have to move to sanctuary to get stats - FIX ITTTT!!!
 
 ## Needs to be implemented!
-- update for heal to be "!heal" shortcut
+- !players command
+  - to query db and return players that have done a command in the last 30 minutes
 - kill command
   - will attack until dead or kill
 - buffs
