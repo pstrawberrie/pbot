@@ -1,15 +1,11 @@
 {
-  "love" : "does some <3 love <3 (!love, !love user, !love user1 user2)",
-  "help" : "lists all commands",
+  "rpg" : "information about the game",
+  "help" : "lists all commands. Use !help [command] for details",
   "newcharacter" : "creates a new character",
-  "stats" : "shows your character's stats",
-  "alive" : "shows if your character is alive or dead",
-  "where" : "shows your character's location",
-  "locations" : "shows all available locations",
-  "move" : "moves your character to a new location (!move town_square)",
   "look" : "shows current location information",
-  "items" : "shows your character's items",
-  "skills" : "shows your character's skills. Use !help skill [skill] to learn about a skill.",
+  "locations" : "shows all available locations",
+  "stats" : "shows your character's stats, location, and items",
+  "move" : "moves your character to a new location (!move town_square)",
   "attack" : "attack a monster or character (!attack [character] or !attack monster [monster])",
   "pickup" : "pick up an item (only 1 of each item allowed)"
 }

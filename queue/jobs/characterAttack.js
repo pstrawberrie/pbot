@@ -53,22 +53,25 @@ module.exports = (username, arg1, arg2) => {
 
       // Cooldown Check
       let cooldown = attackAllowed(characterResult.stats.ap, characterResult.last_attack);
-      if(!characterResult.last_attack) {
-        characterUpdate.last_attack = Date.now();
-      }
-      if(characterResult.last_attack && cooldown.canAttack) {
-        characterUpdate.last_attack = Date.now();
-      }
-      if(characterResult.last_attack && ! cooldown.canAttack) {
-        sendMessage(
-          'say', null,
-          `${username} - your attack is on cooldown (${-cooldown.remaining}sec)`
-        );
-        return;
+      //only check cooldown for character vs. character attacks
+      if(!arg2) {
+        if(!characterResult.last_attack) {
+          characterUpdate.last_attack = Date.now();
+        }
+        if(characterResult.last_attack && cooldown.canAttack) {
+          characterUpdate.last_attack = Date.now();
+        }
+        if(characterResult.last_attack && ! cooldown.canAttack) {
+          sendMessage(
+            'say', null,
+            `${username} - your attack is on cooldown (${-cooldown.remaining}sec)`
+          );
+          return;
+        }
       }
 
       // Player attacks monster
-      if(arg1 === 'monster') {
+      if(arg1 === 'monster' || arg1 === 'm') {
         let monstersArr = [];
         for(let monster of monsters) {
           monstersArr.push(monster.name)

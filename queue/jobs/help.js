@@ -13,7 +13,7 @@ module.exports = (arg1, arg2) => {
   if(!arg1) {
     sendMessage(
       'say', null,
-      `Current commands: ${util.arrCommaJoin(commandsArr)} - use !help [command] to get more information`
+      `[COMMANDS:: ${util.arrCommaJoin(commandsArr)} ] [ !help [command] to get more information ]`
     );
   }
   if(arg1 && commandsArr.includes(arg1)) {

@@ -13,6 +13,49 @@
     "atk":2,
     "def":2
   },
+  "boots": {
+    "hp":5,
+    "ap":3,
+    "def":3,
+    "atk":1
+  },
+  "sword": {
+    "hp":10,
+    "atk":5,
+    "def":1
+  },
+  "bow": {
+    "atk":5,
+    "ap":1
+  },
+  "skull_cap": {
+    "hp":3,
+    "mp":1,
+    "def":1
+  },
+  "earth": {
+    "hp":20,
+    "def":10
+  },
+  "fire": {
+    "atk":5
+  },
+  "ice": {
+    "mp":5,
+    "atk":5
+  },
+  "wind": {
+    "ap":5,
+    "atk":5
+  },
+  "armor": {
+    "hp":18,
+    "def":8
+  },
+  "claw": {
+    "ap":2,
+    "atk":8
+  },
   "cunning": {
     "hp":20,
     "ap":5,
@@ -32,21 +75,6 @@
     "atk":10,
     "def":10
   },
-  "armor": {
-    "hp":18,
-    "def":8
-  },
-  "sword": {
-    "hp":10,
-    "atk":5,
-    "def":1
-  },
-  "boots": {
-    "hp":5,
-    "ap":3,
-    "def":3,
-    "atk":1
-  },
   "hype_cape": {
     "hp":10,
     "ap":5,
@@ -65,20 +93,5 @@
     "mp":10,
     "atk":5,
     "def":5
-  },
-  "earth": {
-    "hp":20,
-    "def":10
-  },
-  "fire": {
-    "atk":20
-  },
-  "ice": {
-    "mp":10,
-    "atk":10
-  },
-  "wind": {
-    "ap":10,
-    "atk":10
   }
 }

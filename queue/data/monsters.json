@@ -10,33 +10,50 @@
   {
     "name": "poring1",
     "location": "forest",
+    "stats": {
+      "atk":3
+    },
     "drops": ["inspiration"]
   },
   {
     "name": "poring2",
     "location": "forest",
+    "stats": {
+      "atk":3
+    },
     "drops": ["inspiration"]
   },
   {
     "name": "poring3",
     "location": "forest",
+    "stats": {
+      "atk":3
+    },
     "drops": ["inspiration"]
   },
   {
     "name": "poring4",
     "location": "forest",
+    "stats": {
+      "atk":3
+    },
     "drops": ["inspiration"]
   },
   {
     "name": "poring5",
     "location": "forest",
+    "stats": {
+      "atk":3
+    },
     "drops": ["inspiration"]
   },
   {
     "name": "zombie1",
     "location": "graveyard",
     "stats": {
-      "hp": 13
+      "hp": 18,
+      "atk":5,
+      "def":4
     },
     "drops": ["boots"]
   },
@@ -44,7 +61,9 @@
     "name": "zombie2",
     "location": "graveyard",
     "stats": {
-      "hp": 13
+      "hp": 18,
+      "atk":5,
+      "def":4
     },
     "drops": ["boots"]
   },
@@ -52,7 +71,9 @@
     "name": "zombie3",
     "location": "graveyard",
     "stats": {
-      "hp": 13
+      "hp": 18,
+      "atk":5,
+      "def":4
     },
     "drops": ["boots"]
   },
@@ -62,9 +83,9 @@
     "stats": {
       "hp": 36,
       "atk": 10,
-      "def": 2
+      "def": 3
     },
-    "drops": ["boots", "sword", "inspiration"]
+    "drops": ["sword", "skull_cap"]
   },
   {
     "name": "ghoul2",
@@ -72,27 +93,37 @@
     "stats": {
       "hp": 33,
       "atk": 10,
-      "def": 2
+      "def": 3
     },
-    "drops": ["boots", "sword", "inspiration"]
+    "drops": ["bow", "skull_cap"]
   },
   {
-    "name": "wraith",
+    "name": "wraith1",
     "location": "graveyard",
     "stats": {
       "hp":60,
-      "def":5,
+      "def":6,
       "atk":12
     },
-    "drops": ["boots", "sword", "inspiration"]
+    "drops": ["bow", "skull_cap"]
+  },
+  {
+    "name": "wraith2",
+    "location": "graveyard",
+    "stats": {
+      "hp":60,
+      "def":6,
+      "atk":12
+    },
+    "drops": ["bow"]
   },
   {
     "name": "fire_boss",
     "location": "fire_cave",
     "stats": {
-      "hp":100,
-      "def":5,
-      "atk":18
+      "hp":150,
+      "def":7,
+      "atk":20
     },
     "drops": ["armor", "fire"]
   },
@@ -100,9 +131,9 @@
     "name": "ice_boss",
     "location": "ice_cave",
     "stats": {
-      "hp":100,
-      "def":6,
-      "atk":15
+      "hp":200,
+      "def":8,
+      "atk":18
     },
     "drops": ["armor", "ice"]
   },
@@ -110,9 +141,19 @@
     "name": "wind_boss",
     "location": "wind_cave",
     "stats": {
-      "hp":100,
-      "def":4,
+      "hp":150,
+      "def":7,
       "atk":20
+    },
+    "drops": ["armor", "wind"]
+  },
+  {
+    "name": "cat_boss",
+    "location": "yarn_cave",
+    "stats": {
+      "hp":500,
+      "def":15,
+      "atk":37
     },
     "drops": ["armor", "wind"]
   },
@@ -120,13 +161,13 @@
     "name": "earth_boss",
     "location": "earth_cave",
     "stats": {
-      "hp":100,
-      "def":9,
-      "atk":13
+      "hp":250,
+      "def":10,
+      "atk":16
     },
     "drops": ["armor", "earth"]
   },
-{
+  {
     "name": "alien",
     "location": "dangerous_field",
     "stats": {

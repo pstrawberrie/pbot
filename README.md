@@ -34,12 +34,30 @@ cd ../web && yarn install (not working yet, skip this for now)
 - monster rez cron
 - player rez cron ("A Healing Wind sweeps over the land")
 
-## Needs to be implemented
-- monsters level up with time
+## Needs to be implemented!
+- update for heal to be "!heal" shortcut
+- kill command
+  - will attack until dead or kill
+- buffs
+  - buffs can be based on move #
+  - buffs can be based on attack #
+- status effects
+  - ie. poison
+- consumables
+  - supercrackyoutube - "monster's heart"
+  - hp potions, mp potions
+- xp
+  - need xp tables for this
+- npc model and npc interaction
+  - quests (need new object in Character model schema for this)
 
 ## Ideas
-- jack - "points for commands"
-  - everytime u send a command for the first time u get points. resets each week
+- JACK
+  - "xp for commands"
+    - everytime u send a command for the first time u get points. resets each week
+  - "leave area buff"
+    - certain areas give you a buff when you enter and leave them
+      - IE. sanctuary = buff on enter, graveyard = buff on leave, etc.
 
 ## Credits
 The RPG Icons this project uses are from here:  

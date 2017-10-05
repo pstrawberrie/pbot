@@ -4,6 +4,12 @@
   .flex-display();
   width:280px;
 
+  .logo {
+    .font-logo;
+    padding-top:.32rem;
+    font-size:3rem;
+  }
+
   .characterBox {
     .flex-display();
     .flex-direction(column);
@@ -34,8 +40,10 @@
     .flex-direction(row);
     .space-between;
     .stat {
+      .inline-block;.relative;
       .border-radius(.2rem);
       padding:.4rem .6rem;
+      .transition(.4s color ease-in-out);
       .ra {
         margin-right:.25rem;
         font-size:.85rem;
@@ -45,7 +53,7 @@
 
   .characterLocation, .characterItems {
     .flex-display();
-    min-width:120px;
+    min-width:90px;
   }
   .characterLocation {
     margin-bottom:.42rem;
@@ -60,5 +68,19 @@
     .ra {margin-right:.32rem;}
   }
   .characterDeaths {margin-bottom:.28rem;}
+
+  // Pop Notifications
+  .notify {
+    .flex-display();
+    .flex-row;
+    .relative;
+    padding:.4rem;
+    font-size: .85rem;
+    .ra { font-size:3rem; margin-right:.35rem; }
+    span.text { padding-top:.5rem; font-size:1.8rem; }
+  }
+
+  // Latest Hero
+
 
 }

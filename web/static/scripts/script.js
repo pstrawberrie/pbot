@@ -35,6 +35,17 @@ const animHealthBar = function(items, character) {
   } else {
     $('.healthColor').removeClass('hp-yellow hp-red');
   }
+  $('[data-text-hp-max]').text(calcStatsFromItems(items, character.items).hp);
+  $('[data-text-hp-current]').text(character.stats.hp);
+}
+
+const newNotification = function(type, text) {
+  $('.notify').html(text);
+  $('.notify').addClass('fadeInUp');
+  setTimeout(function() {
+    $('.notify').removeClass('fadeInUp');
+    $('.notify').html('');
+  },2600);
 }
 
 /* ----------------------
@@ -53,13 +64,18 @@ $(document).ready(function() {
   //@FUNCTION: Update Character Text Stats
   function updateCharacterTextStats(character) {
     for(let stat of Object.keys(character.stats)) {
-      $('[data-text-' + stat + ']').text(character.stats[stat]);
+      if(character.stats[stat] != parseInt($('[data-text-' + stat + ']').text())) {
+        $('[data-text-' + stat + ']').text(character.stats[stat]);
+        $('[data-stats-animate="' + stat + '"]').addClass('jello quickBlue');
+        setTimeout(function() {
+          $('[data-stats-animate="' + stat + '"]').removeClass('jello quickBlue')
+        },500);
+      }
     }
     $('[data-text-deaths]').text(character.totalDeaths);
     $('[data-text-character-kills]').text(character.totalCharacterKills);
     $('[data-text-monster-kills]').text(character.totalMonsterKills);
     $('[data-text-revives]').text(character.TotalTimesRevived);
-    $('[data-text-hp-max]').text(calcStatsFromItems(items, character.items).hp);
   }
 
   //@FUNCTION: Update Health Bar
@@ -104,10 +120,14 @@ $(document).ready(function() {
 
     //on character heal
     if(info.action.includes('Heal')) {
+      newNotification('heal',
+      '<span class="ra ra-feather-wing"></span>' +
+      '<span class="text">Healed!</span>'
+      );
       $('.healthColor').addClass('flash');
       setTimeout(function() {
         $('.healthColor').removeClass('flash');
-      },900)
+      },900);
     }
 
     //on character vs character (character attacks character)

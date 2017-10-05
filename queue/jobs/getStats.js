@@ -21,7 +21,13 @@ module.exports = (username, arg1, arg2) => {
         let deadString = result.stats.hp === 0 ? ' [Dead]' : '';
         sendMessage(
           'say', null,
-          `${arg1 ? arg1 : username}${deadString} Stats: ${util.statsString(result.stats)}`
+          `
+          ${arg1 ? arg1 : username}${deadString}
+          [${util.prettyLocation(result.location)}]
+          [Stats: ${util.statsString(result.stats)}]
+          [Skills: ${util.arrCommaJoin(result.skills)}]
+          [Items: ${util.arrCommaJoin(result.items)}]
+          `
         );
       }
     });

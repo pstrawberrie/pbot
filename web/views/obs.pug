@@ -3,29 +3,31 @@ extends layouts/obsLayout
 block content
   #obs
     .characterBox
+      .logo !RPG
+    .characterBox
       .characterHealthBar
         .healthColor.animated(style=`width:${util.getHealthPercent(items,character)}%` class=util.getHealthColorClass(items,character))
         .healthText
-          span.healthCurrent(data-text-hp=character.stats.hp)= character.stats.hp
+          span.healthCurrent(data-text-hp-current=character.stats.hp)= character.stats.hp
           span &nbsp;/&nbsp;
           span.healthMax(data-text-hp-max=util.calcStatsFromItems(items, character.items).hp)
             | #{util.calcStatsFromItems(items, character.items).hp}
       .characterStats
-        .stat.characterHp.animated(data-animate="stats")
+        .stat.animated(data-stats-animate="hp")
           span.ra.ra-health
-          span.stat(data-text-hp=character.stats.hp)= character.stats.hp
-        .stat.characterAp.animated(data-animate="stats")
+          span(data-text-hp=character.stats.hp)= character.stats.hp
+        .stat.animated(data-stats-animate="ap")
           span.ra.ra-hand
-          span.stat(data-text-ap=character.stats.ap)= character.stats.ap
-        .stat.characterMp.animated(data-animate="stats")
+          span(data-text-ap=character.stats.ap)= character.stats.ap
+        .stat.animated(data-stats-animate="mp")
           span.ra.ra-fairy-wand
-          span.stat(data-text-mp=character.stats.mp)= character.stats.mp
-        .stat.characterAtk.animated(data-animate="stats")
+          span(data-text-mp=character.stats.mp)= character.stats.mp
+        .stat.animated(data-stats-animate="atk")
           span.ra.ra-sword
-          span.stat(data-text-atk=character.stats.atk)= character.stats.atk
-        .stat.characterDef.animated(data-animate="stats")
+          span(data-text-atk=character.stats.atk)= character.stats.atk
+        .stat.animated(data-stats-animate="def")
           span.ra.ra-round-shield
-          span.stat(data-text-def=character.stats.def)= character.stats.def
+          span(data-text-def=character.stats.def)= character.stats.def
     .characterBox
       .characterLocation
         span.animated(data-character-location=character.location)= util.prettyLocation(character.location)
@@ -43,4 +45,6 @@ block content
         .characterRevives
           span.ra.ra-angel-wings.animated
           span(data-text-revives=character.totalTimesRevived)= character.totalTimesRevived
-      
+    .characterBox
+      .notify.animated
+        span &nbsp;

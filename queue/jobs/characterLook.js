@@ -27,9 +27,10 @@ module.exports = (username) => {
 
         sendMessage(
           'say', null,
-          `${util.prettyLocation(currentLocation)} // **Items** ${util.arrCommaJoin(items)}
-           // **Characters** ${util.arrCommaJoin(characters)}
-          // **Monsters** ${util.arrCommaJoin(monsters)}
+          `${util.prettyLocation(currentLocation)}
+          [ITEMS:: ${util.arrCommaJoin(items)} ]
+          [CHARACTERS:: ${util.arrCommaJoin(characters)} ]
+          [MONSTERS:: ${util.arrCommaJoin(monsters)} ]
           `
         );
       })

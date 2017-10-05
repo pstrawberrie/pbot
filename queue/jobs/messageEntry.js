@@ -1,6 +1,7 @@
 const secret = require('../../_config/secret');
 const love = require('./fun/love');
 const squid = require('./fun/squid');
+const rpg = require('./rpg');
 const help = require('./help');
 const newCharacter = require('./newCharacter');
 const getStats = require('./getStats');
@@ -45,6 +46,10 @@ module.exports = (data) => {
       squid(arg1);
       break;
 
+    case "rpg":
+      rpg();
+      break;
+
     case "help":
       help(arg1, arg2);
       break;
@@ -81,6 +86,10 @@ module.exports = (data) => {
     case "move":
     case "goto":
       moveCharacter(user, arg1);
+      break;
+
+    case "sanctuary":
+      moveCharacter(user, 'sanctuary');
       break;
 
     case "look":
