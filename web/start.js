@@ -76,8 +76,8 @@ io.on('connection', function(socket){
 });
 
 // Start Server
-http.listen(3002, function(){
-  console.log(chalk.cyan('+++ web listening (http://localhost:3002) +++'));
+http.listen(4002, function(){
+  console.log(chalk.cyan('+++ web listening (http://localhost:4002) +++'));
 });
 
 module.exports = app;

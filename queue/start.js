@@ -222,8 +222,8 @@ app.get('/skills',cors(),(req, res) => {res.json(skills)})
 app.get('/locations',cors(),(req, res) => { res.json(locations) })
 app.get('/monsters',cors(),(req, res) => { res.json(monsters) })
 
-app.listen(3000, function () {
+app.listen(4000, function () {
   console.log(
-    chalk.cyan('+++ queue listening (http://localhost:3000) +++')
+    chalk.cyan('+++ queue listening (http://localhost:4000) +++')
   )
 });

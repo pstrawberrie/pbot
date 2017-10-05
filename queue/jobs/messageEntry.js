@@ -92,11 +92,17 @@ module.exports = (data) => {
       moveCharacter(user, 'sanctuary');
       break;
 
+    case "town":
+      moveCharacter(user, 'town_square');
+      break;
+
     case "look":
+    case "l":
       characterLook(user, arg1);
       break;
 
     case "attack":
+    case "a":
       characterAttack(user, arg1, arg2);
       break;
 
@@ -107,6 +113,9 @@ module.exports = (data) => {
     case "cast":
       characterCast(user, arg1, arg2);
       break;
+
+    case "heal":
+      characterCast(user, 'heal', arg1);
 
     //+ Admin commands
     case "giveitem":

@@ -103,8 +103,8 @@ app.post('/action', function (req, res) {
     res.end();
   }
 });
-app.listen(3001, function () {
+app.listen(4001, function () {
   console.log(
-    chalk.cyan('+++ irc http listening (http://localhost:3001) +++')
+    chalk.cyan('+++ irc http listening (http://localhost:4001) +++')
   )
 });

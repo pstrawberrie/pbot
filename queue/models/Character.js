@@ -50,6 +50,8 @@ const characterSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  currentQuests: Array,
+  completedQuests: Array,
   last_move: Date,
   last_attack: Date,
   last_target: String,
