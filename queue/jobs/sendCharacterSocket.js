@@ -5,7 +5,7 @@ module.exports = (action, updateObj) => {
     console.log('provide an action for the socket send!')
   }
   request({
-    uri: 'http://localhost:3002/status',
+    uri: 'http://localhost:4002/status',
     method: 'POST'
   }, function(error, response, body) {
     if(error) {console.log(error);return;}
@@ -25,7 +25,7 @@ module.exports = (action, updateObj) => {
   if(updateObj.target) { requestJson.target = updateObj.target }
 
   const requestOpts = {
-    uri: 'http://localhost:3002/socket',
+    uri: 'http://localhost:4002/socket',
     method: 'POST',
     json: requestJson
   };

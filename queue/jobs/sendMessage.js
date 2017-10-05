@@ -3,13 +3,13 @@ const request = require('request');
 module.exports = (type, user, message) => {
 
   // Determine type of message to send (default is "say")
-  let uri = 'http://localhost:3001/say';
+  let uri = 'http://localhost:4001/say';
   let jsonMsg = { message };
   if(type === 'whisper' && user != null) {
-    uri = 'http://localhost:3001/whisper';
+    uri = 'http://localhost:4001/whisper';
     jsonMsg.user = user;
   }
-  if(type === 'action') { uri = 'http://localhost:3001/action' }
+  if(type === 'action') { uri = 'http://localhost:4001/action' }
 
   // Set up request options
   const requestOptions = {

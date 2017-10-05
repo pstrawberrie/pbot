@@ -13,7 +13,7 @@ cd ../web && yarn install (not working yet, skip this for now)
 `````
 **2. Configure your API keys and mongodb (pbot/_config/secret.js)**  
 **3. Start your mongodb server**  
-**4. Start the queue process ``cd pbot/queue && npm start`` (localhost:3000)**  
+**4. Start the queue process ``cd pbot/queue && npm start`` (localhost:4000)**  
 **5. Start the irc process ``cd pbot/queue && npm start`` (localhost:3001)**  
 **6. Start the web process ``cd pbot/queue && npm start`` (http://localhost:3003)**  
 

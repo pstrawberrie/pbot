@@ -23,7 +23,7 @@ const tmiOptions = {
   channels: secret.twitchChannels
 };
 let requestOptions = {
-  uri: 'http://localhost:3000/queue',
+  uri: 'http://localhost:4000/queue',
   method: 'POST'
 }
 const irc = new tmi.client(tmiOptions);

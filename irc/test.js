@@ -7,7 +7,7 @@ const util = require('../_shared/util');
 
 // Function to Send Test Chats
 let requestOptions = {
-  uri: 'http://localhost:3000/queue',
+  uri: 'http://localhost:4000/queue',
   method: 'POST'
 }
 function sendTestRequest(user, message) {
