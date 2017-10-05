@@ -10,28 +10,29 @@ const characterSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'death_pit'
   },
   stats: {
     hp: {
       type: Number,
-      default: 10
+      default: 0
     },
     ap: {
       type: Number,
-      default: 3
+      default: 0
     },
     mp: {
       type: Number,
-      default: 3
+      default: 0
     },
     def: {
       type: Number,
-      default: 1
+      default: 0
     },
     atk: {
       type: Number,
-      default: 2
+      default: 0
     }
   },
   skills: {
@@ -49,13 +50,27 @@ const characterSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  currentQuests: Array,
+  completedQuests: Array,
   last_move: Date,
   last_attack: Date,
   last_target: String,
-  totalMonsterKills: Number,
-  totalCharacterKills: Number,
-  totalDeaths: Number,
-  totalTimesRevived: Number,
+  totalMonsterKills: {
+    type: Number,
+    default:0
+  },
+  totalCharacterKills: {
+    type: Number,
+    default:0
+  },
+  totalDeaths: {
+    type: Number,
+    default:0
+  },
+  totalTimesRevived: {
+    type: Number,
+    default:0
+  },
   created_at: Date,
   updated_at: Date
 });
