@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const util = require('../_shared/util');
 
+
 // Function to Send Test Chats
 let requestOptions = {
   uri: 'http://localhost:4000/queue',
@@ -17,6 +18,7 @@ function sendTestRequest(user, message) {
   requestOptions.json = {
     name: user,
     message,
+    isTest:true,
     time: Date.now()
   }
   request(requestOptions, function (error, response, body) {
@@ -60,6 +62,8 @@ process.on('SIGINT' , graceful);
 // HTTP Setup
 //@TODO: duplicate whisper & action functionality to test
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.sendFile("test.html", { root : __dirname});
@@ -75,6 +79,29 @@ app.post('/msg', (req, res) => {
     res.end();
   }
 });
-app.listen(3001, function () {
-  console.log('+++  irc http listening (http://localhost:3001) +++')
+app.post('/testMsg', (req, res) => {
+  sendSocket(req.body);
+  res.end();
+});
+
+function sendSocket(data) {
+  io.emit('bot', data);
+}
+io.on('connection', function(socket){
+
+  //+ Connect & Disconnect Notice
+  console.log('New Client Connected');
+  socket.on('disconnect', function(){
+    console.log('Client Disconnected');
+  });
+
+  //+ example..
+  socket.on('bot', function(data){
+    console.log(data);
+  });
+
+});
+
+http.listen(4001, function () {
+  console.log('+++  irc http listening (http://localhost:4001) +++')
 });
