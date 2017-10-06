@@ -26,7 +26,6 @@ module.exports = (username) => {
       .then((result) => {
         console.log('Made new character: ' + username);
         //do default character actions
-        characterItem('give', username, 'soul');
         moveCharacter(username, 'sanctuary');
         //send welcome
         sendMessage(

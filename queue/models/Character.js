@@ -40,7 +40,8 @@ const characterSchema = new mongoose.Schema({
     default: ['heal']
   },
   items: {
-    type: Array
+    type: Array,
+    default: ['soul']
   },
   xp: {
     type:Number,
@@ -82,6 +83,15 @@ characterSchema.pre('save', function(next) {
   var currentDate = new Date();
   this.updated_at = currentDate;
   if (!this.created_at) this.created_at = currentDate;
+
+  next();
+
+});
+characterSchema.pre('update', function(next) {
+
+  // Dates
+  var currentDate = new Date();
+  this.updated_at = currentDate;
 
   next();
 

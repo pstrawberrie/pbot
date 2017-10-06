@@ -46,7 +46,7 @@ module.exports = (username, itemToPickup) => {
 
             Location.update({name:characterLocation}, {items:newLocationItems})
             .then(locationUpdateResult => {
-              Character.findOneAndUpdate({name:username}, {items:newCharacterItems}, {new:true})
+              Character.findOneAndUpdate({name:username}, {items:newCharacterItems, updated_at: new Date()}, {new:true})
               .then(characterUpdateResult => {
                 sendMessage('action', null, `${username} picked up ${itemToPickup}. Visit the sanctuary to equip items.`);
                 sendCharacterSocket('characterItemPickup', {character:characterUpdateResult});

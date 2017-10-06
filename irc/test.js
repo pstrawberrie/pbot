@@ -32,7 +32,7 @@ function sendTestRequest(user, message) {
 }
 
 // Set Up Agenda for testing
-const agenda = new Agenda({db:{address:secret.testDbString}}); //init agenda
+const agenda = new Agenda({db:{address:secret.dbString}}); //init agenda
 agenda.define('test', function(job, done) {
   sendTestRequest('pstrawberrie', '!stats');
   done();

@@ -67,7 +67,7 @@ module.exports = (username, arg1) => {
     //success & update
     if(result.name === username && result.location != arg1) {
       let cdCheck = moveCooldown(result.stats.ap, result.last_move);
-      let update = {location: arg1}
+      let update = {location: arg1, updated_at: new Date()}
       let lastLocation = result.location;
 
       if(!result.last_move) {

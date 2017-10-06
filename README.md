@@ -36,14 +36,14 @@ cd ../web && yarn install (not working yet, skip this for now)
 - update for heal to be "!heal" shortcut
 
 ## Bugs
-- !newcharacter spawns with 0 stats, and have to move to sanctuary to get stats - FIX ITTTT!!!
+- ~~!newcharacter spawns with 0 stats, and have to move to sanctuary to get stats~~
 
 ## Needs to be implemented!
 - !players command
   - to query db and return players that have done a command in the last 30 minutes
 - !monsters command
   - list monster in current location
-- kill command
+- !kill command
   - will attack until dead or kill
 - buffs
   - buffs can be based on move #

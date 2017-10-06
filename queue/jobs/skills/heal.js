@@ -45,7 +45,8 @@ module.exports = (caster, castTarget) => {
         mp:casterNewMp,
         atk:caster.stats.atk,
         def:caster.stats.def
-      }
+      },
+      updated_at: new Date()
     }
 
     Character.findOneAndUpdate({name:caster.name},casterUpdate,{new:true})
@@ -84,7 +85,8 @@ module.exports = (caster, castTarget) => {
         mp:casterNewMp,
         atk:caster.stats.atk,
         def:caster.stats.def
-      }
+      },
+      updated_at: new Date()
     }
     let castTargetUpdate = {
       stats: {

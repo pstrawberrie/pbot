@@ -51,6 +51,12 @@ module.exports = (username, arg1, arg2) => {
         return;
       }
 
+      // Death Pit Check
+      if(characterResult.location === 'death_pit') {
+        sendMessage( 'action', null, `You are overwhelmed by grief`);
+        return;
+      }
+
       // Cooldown Check
       let cooldown = attackAllowed(characterResult.stats.ap, characterResult.last_attack);
       //only check cooldown for character vs. character attacks

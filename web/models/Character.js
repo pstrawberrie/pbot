@@ -40,7 +40,8 @@ const characterSchema = new mongoose.Schema({
     default: ['heal']
   },
   items: {
-    type: Array
+    type: Array,
+    default: ['soul']
   },
   xp: {
     type:Number,

@@ -18,6 +18,7 @@ const characterAttack = require('./characterAttack');
 const resCharacter = require('./reviveCharacter');
 const itemPickup = require('./itemPickup');
 const characterCast = require('./characterCast');
+const getActivePlayers = require('./getActivePlayers');
 
 module.exports = (data) => {
 
@@ -56,6 +57,10 @@ module.exports = (data) => {
 
     case "newcharacter":
       newCharacter(user);
+      break;
+
+    case "players":
+      getActivePlayers();
       break;
 
     case "alive":

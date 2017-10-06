@@ -34,13 +34,16 @@ module.exports = (directive, attacker, defender) => {
 
     const newCharacterHp = util.negativeToZero(attacker.stats.hp - baseDmgToCharacter);
     const newMonsterHp = util.negativeToZero(defender.stats.hp - baseDmgToMonster);
-    let characterUpdate = {stats:{
-      hp:newCharacterHp,
-      ap:attacker.stats.ap,
-      mp:attacker.stats.mp,
-      atk:attacker.stats.atk,
-      def:attacker.stats.def
-    }};
+    let characterUpdate = {
+      stats:{
+        hp:newCharacterHp,
+        ap:attacker.stats.ap,
+        mp:attacker.stats.mp,
+        atk:attacker.stats.atk,
+        def:attacker.stats.def
+      },
+      updated_at: new Date()
+    };
     let monsterUpdate = {stats:{
       hp:newMonsterHp,
       ap:defender.stats.ap,
@@ -76,7 +79,7 @@ module.exports = (directive, attacker, defender) => {
         }
         if(monsterDead === 1) {
           sendMessage('action', null, `** ${defender.name} was killed by ${attacker.name}! ** Squid4`);
-          if(Math.random() > .65) itemDrop(defender.drops, defender.location);
+          if(Math.random() > .48) itemDrop(defender.drops, defender.location);
           moveMonster(defender.name, 'death_pit');
         }
         // done + socket
@@ -103,7 +106,9 @@ module.exports = (directive, attacker, defender) => {
       atk:defender.stats.atk,
       def:defender.stats.def
     }};
-    let characterUpdate = {};
+    let characterUpdate = {
+      updated_at: new Date()
+    };
     let enemyDead = 0;
     if(newEnemyHp === 0) {
       enemyDead = 1; enemyUpdate.dead = 1;
@@ -119,17 +124,16 @@ module.exports = (directive, attacker, defender) => {
       sendMessage('action', null,
         `${attacker.name} ${attackString} ${defender.name} for ${baseDmgToEnemy} damage (${newEnemyHp}hp remaining).`
       )
-      if(enemyDead === 1) {
-        sendMessage('action', null, `** ${defender.name} was killed by ${attacker.name}! ** Squid4`);
-        //update attacker total character kills
-        Character.update({name:attacker.name}, characterUpdate)
-        .then(characterUpdateResult => {
-          console.log(`updated ${attacker.name} after killing ${defender.name}`)
+      Character.update({name:attacker.name}, characterUpdate)
+      .then(characterUpdateResult => {
+        if(enemyDead === 1) {
+          console.log(`updated ${attacker.name} after killing ${defender.name}`);
+          sendMessage('action', null, `** ${defender.name} was killed by ${attacker.name}! ** Squid4`);
           sendCharacterSocket('characterDied', {character:enemyUpdate});
           sendCharacterSocket('characterDeathAward', {character:characterUpdateResult});
-        }).catch(err => {console.log(`err saving attacker info on kill for ${attacker.name}`)})
-      }
-      sendCharacterSocket('characterVsCharacter', {character:attacker,enemy:enemyUpdate});
+        }
+        sendCharacterSocket('characterVsCharacter', {character:attacker,enemy:enemyUpdate});
+      }).catch(err => {console.log(`err saving attacker info on kill for ${attacker.name}`)})
     }).catch(err => {console.log(`Err updating character vs character\n ${err}`)})
 
     console.log(`${attacker.name} damage to ${defender.name}: ${baseDmgToEnemy}`);

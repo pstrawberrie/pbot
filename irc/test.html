@@ -105,10 +105,12 @@
         });
         $('#display').append('<div class="message"><span class="name">' + msgJson.name + '</span> &rsaquo; ' + msgJson.message + '</div>');
         $('#message').val('');
+        $("#display").scrollTop($("#display")[0].scrollHeight);
       })
       var socket = io();
       socket.on('bot', function(data) {
         $('#display').append('<div class="message"><span class="name bot">teh_b0t</span> &rsaquo; ' + data.message + '</div>');
+        $("#display").scrollTop($("#display")[0].scrollHeight);
       })
 
     </script>
