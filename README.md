@@ -41,6 +41,8 @@ cd ../web && yarn install (not working yet, skip this for now)
 ## Needs to be implemented!
 - !players command
   - to query db and return players that have done a command in the last 30 minutes
+- !monsters command
+  - list monster in current location
 - kill command
   - will attack until dead or kill
 - buffs

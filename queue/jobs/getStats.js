@@ -32,7 +32,7 @@ module.exports = (username, arg1, arg2) => {
       }
     });
   }
-  if(arg1 === 'monster') {
+  if(arg1 === 'monster' || arg1 === 'm') {
     Monster.find({name:arg2})
     .then(result => {
       if(!result[0]) {
