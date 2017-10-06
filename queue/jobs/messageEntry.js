@@ -85,6 +85,7 @@ module.exports = (data) => {
 
     case "move":
     case "goto":
+    case "m":
       moveCharacter(user, arg1);
       break;
 
