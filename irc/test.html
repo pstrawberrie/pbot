@@ -70,6 +70,10 @@
         color: #fff;
       }
 
+      span.name.bot {
+        color: yellow;
+      }
+
     </style>
   </head>
 
@@ -77,11 +81,12 @@
 
     <div class="container">
       <div id="display"></div>
-      <input type="text" id="user" value="user123">
+      <input type="text" id="user" value="teh_homie">
       <input type="text" id="message" placeholder="type in here and press enter to send">
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       $('#message').on('keyup', function(e) {
         if (e.which != 13) return;
@@ -100,6 +105,10 @@
         });
         $('#display').append('<div class="message"><span class="name">' + msgJson.name + '</span> &rsaquo; ' + msgJson.message + '</div>');
         $('#message').val('');
+      })
+      var socket = io();
+      socket.on('bot', function(data) {
+        $('#display').append('<div class="message"><span class="name bot">teh_b0t</span> &rsaquo; ' + data.message + '</div>');
       })
 
     </script>

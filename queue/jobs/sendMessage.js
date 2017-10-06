@@ -1,5 +1,8 @@
 const request = require('request');
 
+// Testing with local web?
+const testMode = 1;
+
 module.exports = (type, user, message) => {
 
   // Determine type of message to send (default is "say")
@@ -10,6 +13,7 @@ module.exports = (type, user, message) => {
     jsonMsg.user = user;
   }
   if(type === 'action') { uri = 'http://localhost:4001/action' }
+  if(testMode === 1) { uri = 'http://localhost:4001/testMsg' }
 
   // Set up request options
   const requestOptions = {
