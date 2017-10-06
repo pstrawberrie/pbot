@@ -1,0 +1,7 @@
+[
+    {
+        "name":"guardian",
+        "location":"town_square",
+        "quests": ["neophyte", "initiate", "honorable"]
+    }
+]

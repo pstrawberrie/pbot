@@ -1,0 +1,32 @@
+{
+    "neophyte": {
+        "info_text": "Kill 10 monsters",
+        "requiresQuests": null,
+        "requiresItems": ["inspiration", "boots"],
+        "requiresStats": null,
+        "goldReward": 69,
+        "itemReward": ["shield"],
+        "statusReward":null,
+        "timeToComplete":null
+    },
+    "initiate": {
+        "info_text": "Kill 25 monsters",
+        "requiresQuests": ["neophyte"],
+        "requiresItems": ["inspiration", "boots", "sword", "skull_cap"],
+        "requiresStats": null,
+        "goldReward": 300,
+        "itemReward": ["spirit"],
+        "statusReward":null,
+        "timeToComplete":null
+    },
+    "honorable": {
+        "info_text": "Slay the fire, earth, wind, and ice bosses.",
+        "requiresQuests": ["neophyte", "beginner"],
+        "requiresItems": ["fire","earth", "wind", "ice"],
+        "requiresStats": null,
+        "goldReward": 669,
+        "itemReward": ["honor"],
+        "statusReward":null,
+        "timeToComplete":null
+    }
+}
