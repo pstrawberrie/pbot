@@ -1,7 +1,7 @@
 const request = require('request');
 
 // Testing with local web?
-const testMode = 1;
+const testMode = 0;
 
 module.exports = (type, user, message) => {
 
