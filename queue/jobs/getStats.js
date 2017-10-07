@@ -7,7 +7,7 @@ const sendMessage = require('./sendMessage');
 
 module.exports = (username, arg1, arg2) => {
 
-  if(arg1 != 'monster') {
+  if(arg1 != 'monster' || arg1 != 'm') {
     getCharacter(arg1 ? arg1 : username)
     .then((result) => {
       if(result == null) {
