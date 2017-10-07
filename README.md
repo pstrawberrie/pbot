@@ -1,21 +1,21 @@
 # pbot
 Twitch Chat Bot **_prototype_**  
-Developing on node 8.5.0  
+Developing on node 8.6.0  
 
 ## Try it out
 **1. Get the repo and install dependencies**  
 `````
-nvm use 8.5.0
+nvm use 8.6.0
 git clone https://github.com/pstrawberrie/pbot
 cd pbot/queue && yarn install
 cd ../irc && yarn install
-cd ../web && yarn install (not working yet, skip this for now)
+cd ../web && yarn install
 `````
 **2. Configure your API keys and mongodb (pbot/_config/secret.js)**  
 **3. Start your mongodb server**  
 **4. Start the queue process ``cd pbot/queue && npm start`` (localhost:4000)**  
-**5. Start the irc process ``cd pbot/queue && npm start`` (localhost:3001)**  
-**6. Start the web process ``cd pbot/queue && npm start`` (http://localhost:3003)**  
+**5. Start the irc process ``cd pbot/queue && npm start`` (localhost:4001)**  
+**6. Start the web process ``cd pbot/queue && npm start`` (http://localhost:4002)**  
 
 ----------------------------------
 
@@ -34,17 +34,15 @@ cd ../web && yarn install (not working yet, skip this for now)
 - monster rez cron
 - player rez cron ("A Healing Wind sweeps over the land")
 - update for heal to be "!heal" shortcut
+- !players command (list players active in last 10 minutes)
+- !monsters command (list monsters in current character location)
 
 ## Bugs
 - ~~!newcharacter spawns with 0 stats, and have to move to sanctuary to get stats~~
 
 ## Needs to be implemented!
-- !players command
-  - to query db and return players that have done a command in the last 30 minutes
-- !monsters command
-  - list monster in current location
-- !kill command
-  - will attack until dead or kill
+- npc model and npc interaction
+- quests 
 - buffs
   - buffs can be based on move #
   - buffs can be based on attack #
@@ -55,9 +53,8 @@ cd ../web && yarn install (not working yet, skip this for now)
   - hp potions, mp potions
 - xp
   - need xp tables for this
-- npc model and npc interaction
-  - quests (need new object in Character model schema for this)
-
+- !kill command
+  - will attack until dead or kill
 ## Ideas
 - JACK
   - "xp for commands"

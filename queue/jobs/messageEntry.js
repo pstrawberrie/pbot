@@ -19,6 +19,7 @@ const resCharacter = require('./reviveCharacter');
 const itemPickup = require('./itemPickup');
 const characterCast = require('./characterCast');
 const getActivePlayers = require('./getActivePlayers');
+const monstersInLocation = require('./monstersInLocation');
 
 module.exports = (data) => {
 
@@ -105,6 +106,10 @@ module.exports = (data) => {
     case "look":
     case "l":
       characterLook(user, arg1);
+      break;
+
+    case "monsters":
+      monstersInLocation(user);
       break;
 
     case "attack":
