@@ -1,7 +1,5 @@
+const secret = require('../../_config/secret');
 const request = require('request');
-
-// Testing with local web?
-const testMode = 0;
 
 module.exports = (type, user, message) => {
 
@@ -13,7 +11,7 @@ module.exports = (type, user, message) => {
     jsonMsg.user = user;
   }
   if(type === 'action') { uri = 'http://localhost:4001/action' }
-  if(testMode === 1) { uri = 'http://localhost:4001/testMsg' }
+  if(secret.testMode && secret.testMode === 1) { uri = 'http://localhost:4001/testMsg' }
 
   // Set up request options
   const requestOptions = {

@@ -9,7 +9,7 @@ module.exports = (caster, castTarget) => {
 
   //if mp is 0, return cant heal message
   if(caster.stats.mp === 0) {
-    sendMessage('say',null,`${caster.name} - you are out of MP`)
+    sendMessage('say',null,`${caster.name} - you are out of MP (heal costs 1MP)`)
     return;
   }
 
