@@ -22,10 +22,10 @@ module.exports = (arg1, arg2) => {
       `The !${arg1} command ${commands[arg1]}`
     );
   }
-  if(arg1 === 'skill' && skillsArr.includes(arg2)) {
+  if(arg1 === 'skill' && skillsArr.includes(arg2) || arg1 === 's' && skillsArr.includes(arg2)) {
     sendMessage('say', null, `${skills[arg2]}`)
   }
-  if(arg1 === 'item' && itemsArr.includes(arg2)) {
+  if(arg1 === 'item' && itemsArr.includes(arg2) || arg1 === 'i' && itemsArr.includes(arg2)) {
     sendMessage('say', null, `${util.prettyLocation(arg2)} gives ${util.statsString(items[arg2], 'item')}`)
   }
 

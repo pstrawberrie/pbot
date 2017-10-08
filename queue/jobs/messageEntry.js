@@ -53,6 +53,7 @@ module.exports = (data) => {
       break;
 
     case "help":
+    case "h":
       help(arg1, arg2);
       break;
 

@@ -85,7 +85,7 @@
       "atk": 10,
       "def": 3
     },
-    "drops": ["sword", "skull_cap"]
+    "drops": ["bow", "skull_cap"]
   },
   {
     "name": "ghoul2",
@@ -105,7 +105,7 @@
       "def":6,
       "atk":12
     },
-    "drops": ["bow", "skull_cap"]
+    "drops": ["sword"]
   },
   {
     "name": "wraith2",
@@ -115,7 +115,7 @@
       "def":6,
       "atk":12
     },
-    "drops": ["bow"]
+    "drops": ["sword"]
   },
   {
     "name": "fire_boss",

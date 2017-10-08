@@ -7,7 +7,7 @@ const sendMessage = require('./sendMessage');
 
 module.exports = (username, arg1, arg2) => {
 
-  if(arg1 != 'monster' || arg1 != 'm') {
+  if(arg1 != 'monster' && arg1 != 'm') {
     getCharacter(arg1 ? arg1 : username)
     .then((result) => {
       if(result == null) {
@@ -41,7 +41,9 @@ module.exports = (username, arg1, arg2) => {
       }
       if(result[0] && result[0].name === arg2) {
         let deadString = result[0].stats.hp === 0 ? ' [Dead]' : '';
-        sendMessage('say', null, `${util.prettyLocation(arg2)}${deadString} Stats: ${util.statsString(result[0].stats)}`);
+        return sendMessage('say', null,
+        `${util.prettyLocation(arg2)}${deadString} [Stats: ${util.statsString(result[0].stats)}] [Drops: ${util.arrCommaJoin(result[0].drops)}]`
+      );
       }
     }).catch(err => {console.log('err finding monster\n' + err)})
   }
