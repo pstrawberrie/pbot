@@ -161,9 +161,9 @@
     "name": "alien",
     "location": "dangerous_field",
     "stats": {
-      "hp":800,
-      "def":60,
-      "atk":75
+      "hp":869,
+      "def":50,
+      "atk":60
     },
     "drops": ["cunning"]
   },
@@ -172,8 +172,8 @@
     "location": "yarn_cave",
     "stats": {
       "hp":1569,
-      "def":100,
-      "atk":150
+      "def":80,
+      "atk":100
     },
     "drops": ["claw"]
   },
@@ -182,8 +182,8 @@
     "location": "infinite_train",
     "stats": {
       "hp":3069,
-      "def":200,
-      "atk":300
+      "def":150,
+      "atk":150
     },
     "drops": ["hero"]
   }
