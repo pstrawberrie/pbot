@@ -39,10 +39,11 @@ cd ../web && yarn install
 
 ## Bugs
 - ~~!newcharacter spawns with 0 stats, and have to move to sanctuary to get stats~~
+- dead characters can be killed at 0 hp
 
 ## Needs to be implemented!
 - npc model and npc interaction
-- quests 
+- quests
 - buffs
   - buffs can be based on move #
   - buffs can be based on attack #
