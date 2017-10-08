@@ -52,15 +52,18 @@
     "hp":18,
     "def":8
   },
-  "claw": {
-    "ap":2,
-    "atk":8
-  },
   "cunning": {
     "hp":20,
     "ap":5,
     "mp":5,
     "atk":10,
+    "def":5
+  },
+  "claw": {
+    "hp":20,
+    "ap":5,
+    "mp":1,
+    "atk":20,
     "def":5
   },
   "hero": {

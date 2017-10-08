@@ -148,21 +148,11 @@
     "drops": ["armor", "wind"]
   },
   {
-    "name": "cat_boss",
-    "location": "yarn_cave",
-    "stats": {
-      "hp":500,
-      "def":15,
-      "atk":37
-    },
-    "drops": ["armor", "wind"]
-  },
-  {
     "name": "earth_boss",
     "location": "earth_cave",
     "stats": {
       "hp":250,
-      "def":10,
+      "def":12,
       "atk":16
     },
     "drops": ["armor", "earth"]
@@ -171,19 +161,29 @@
     "name": "alien",
     "location": "dangerous_field",
     "stats": {
-      "hp":300,
-      "def":15,
-      "atk":35
+      "hp":800,
+      "def":60,
+      "atk":75
     },
     "drops": ["cunning"]
+  },
+  {
+    "name": "cat_boss",
+    "location": "yarn_cave",
+    "stats": {
+      "hp":1569,
+      "def":100,
+      "atk":150
+    },
+    "drops": ["claw"]
   },
   {
     "name": "spork_boss",
     "location": "infinite_train",
     "stats": {
-      "hp":1069,
-      "def":50,
-      "atk":50
+      "hp":3069,
+      "def":200,
+      "atk":300
     },
     "drops": ["hero"]
   }
